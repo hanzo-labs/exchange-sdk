@@ -40,6 +40,7 @@ const plugins = [
   peerDepsExternal(),
   resolve({
     extensions,
+    preferBuiltins: true,
   }),
   json({
     // All JSON files will be parsed by default,
