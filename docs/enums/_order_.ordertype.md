@@ -15,7 +15,7 @@
 
 • **LIMIT**:
 
-*Defined in [Order.ts:12](https://github.com/hanzoai/matching-engine/blob/d9d262a/src/Order.ts#L12)*
+*Defined in [Order.ts:12](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L12)*
 
 ___
 
@@ -23,4 +23,4 @@ ___
 
 • **MARKET**:
 
-*Defined in [Order.ts:16](https://github.com/hanzoai/matching-engine/blob/d9d262a/src/Order.ts#L16)*
+*Defined in [Order.ts:16](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L16)*

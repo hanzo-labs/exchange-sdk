@@ -18,7 +18,7 @@
 
 • **CANCELLED**:
 
-*Defined in [Order.ts:42](https://github.com/hanzoai/matching-engine/blob/d9d262a/src/Order.ts#L42)*
+*Defined in [Order.ts:42](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L42)*
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 • **FILLED**:
 
-*Defined in [Order.ts:34](https://github.com/hanzoai/matching-engine/blob/d9d262a/src/Order.ts#L34)*
+*Defined in [Order.ts:34](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L34)*
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 • **PARTIALLY_FILLED**:
 
-*Defined in [Order.ts:30](https://github.com/hanzoai/matching-engine/blob/d9d262a/src/Order.ts#L30)*
+*Defined in [Order.ts:30](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L30)*
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 • **PARTIALLY_FILLED_CANCELLED**:
 
-*Defined in [Order.ts:38](https://github.com/hanzoai/matching-engine/blob/d9d262a/src/Order.ts#L38)*
+*Defined in [Order.ts:38](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L38)*
 
 ___
 
@@ -50,4 +50,4 @@ ___
 
 • **UNFILLED**:
 
-*Defined in [Order.ts:26](https://github.com/hanzoai/matching-engine/blob/d9d262a/src/Order.ts#L26)*
+*Defined in [Order.ts:26](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L26)*

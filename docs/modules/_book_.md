@@ -19,7 +19,7 @@
 
 ▸ **askComparator**(`a`: [Order](../classes/_order_.order.md), `b`: [Order](../classes/_order_.order.md)): *number*
 
-*Defined in [Book.ts:18](https://github.com/hanzoai/matching-engine/blob/d9d262a/src/Book.ts#L18)*
+*Defined in [Book.ts:18](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Book.ts#L18)*
 
 Min-heap comparator function
 
@@ -38,7 +38,7 @@ ___
 
 ▸ **bidComparator**(`a`: [Order](../classes/_order_.order.md), `b`: [Order](../classes/_order_.order.md)): *number*
 
-*Defined in [Book.ts:7](https://github.com/hanzoai/matching-engine/blob/d9d262a/src/Book.ts#L7)*
+*Defined in [Book.ts:7](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Book.ts#L7)*
 
 Max-heap comparator function
 
