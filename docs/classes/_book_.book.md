@@ -18,6 +18,6 @@
 
 • **test**: *string* = "100"
 
-*Defined in [Book.ts:6](https://github.com/hanzoai/matching-engine/blob/c1d9ac8/src/Book.ts#L6)*
+*Defined in [Book.ts:6](https://github.com/hanzoai/matching-engine/blob/0373e78/src/Book.ts#L6)*
 
 test documentation
