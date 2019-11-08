@@ -2,6 +2,8 @@
 
 # Class: Order
 
+Represents an order that's put in a book
+
 ## Hierarchy
 
 * **Order**
@@ -27,7 +29,7 @@
 
 \+ **new Order**(`type`: [OrderType](../enums/_order_.ordertype.md), `price`: number | string | Decimal, `amount`: number | string | Decimal): *[Order](_order_.order.md)*
 
-*Defined in [Order.ts:72](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L72)*
+*Defined in [Order.ts:72](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L72)*
 
 **Parameters:**
 
@@ -45,7 +47,9 @@ Name | Type |
 
 • **amount**: *Decimal*
 
-*Defined in [Order.ts:68](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L68)*
+*Defined in [Order.ts:68](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L68)*
+
+Order size
 
 ___
 
@@ -53,7 +57,9 @@ ___
 
 • **createdAt**: *number*
 
-*Defined in [Order.ts:72](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L72)*
+*Defined in [Order.ts:72](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L72)*
+
+Unix time
 
 ___
 
@@ -61,7 +67,9 @@ ___
 
 • **id**: *string*
 
-*Defined in [Order.ts:52](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L52)*
+*Defined in [Order.ts:52](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L52)*
+
+Unique order id
 
 ___
 
@@ -69,7 +77,9 @@ ___
 
 • **price**: *Decimal*
 
-*Defined in [Order.ts:64](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L64)*
+*Defined in [Order.ts:64](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L64)*
+
+Bid/Ask price
 
 ___
 
@@ -77,7 +87,9 @@ ___
 
 • **status**: *[OrderStatus](../enums/_order_.orderstatus.md)* =  OrderStatus.UNFILLED
 
-*Defined in [Order.ts:60](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L60)*
+*Defined in [Order.ts:60](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L60)*
+
+Status of the order
 
 ___
 
@@ -85,4 +97,6 @@ ___
 
 • **type**: *[OrderType](../enums/_order_.ordertype.md)*
 
-*Defined in [Order.ts:56](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L56)*
+*Defined in [Order.ts:56](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L56)*
+
+Type of the order

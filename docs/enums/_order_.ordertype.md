@@ -2,6 +2,8 @@
 
 # Enumeration: OrderType
 
+Type of the order
+
 ## Index
 
 ### Enumeration members
@@ -15,7 +17,9 @@
 
 • **LIMIT**:
 
-*Defined in [Order.ts:12](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L12)*
+*Defined in [Order.ts:12](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L12)*
+
+Limit order
 
 ___
 
@@ -23,4 +27,6 @@ ___
 
 • **MARKET**:
 
-*Defined in [Order.ts:16](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/Order.ts#L16)*
+*Defined in [Order.ts:16](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L16)*
+
+Market order

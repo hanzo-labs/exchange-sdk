@@ -14,7 +14,7 @@
 
 ▸ **default**(...`args`: any[]): *Moment*
 
-*Defined in [utils/time.ts:1](https://github.com/hanzoai/matching-engine/blob/0889bcc/src/utils/time.ts#L1)*
+*Defined in [utils/time.ts:1](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/utils/time.ts#L1)*
 
 **Parameters:**
 
