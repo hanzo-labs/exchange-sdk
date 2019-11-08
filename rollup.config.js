@@ -61,6 +61,8 @@ const plugins = [
     namedExports: true // Default: true
   }),
   babel({
+    extensions,
+    include: 'src/**',
     exclude: 'node_modules/**',
   }),
   commonjs(),

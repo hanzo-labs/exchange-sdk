@@ -33,13 +33,15 @@
     "rollup-plugin-visualizer": "2.7.2",
     "serve": "11.2.0",
     "source-map-explorer": "2.1.0",
+    "typedoc": "0.15.0",
     "typescript": "3.7.2"
   },
   "scripts": {
     "audit": "node_modules/.bin/source-map-explorer dist/index.js",
     "prepare": "npm run build",
     "clean": "rm -rf dist",
-    "build": "npm run clean && && npm run build:types && node_modules/.bin/rollup -c",
+    "build": "npm run clean && npm run build:types && npm run build:docs && node_modules/.bin/rollup -c",
+    "build:docs": "node_modules/.bin/typedoc --out docs src",
     "build:types": "tsc --emitDeclarationOnly",
     "build:watch": "node_modules/.bin/rollup -c -w",
     "type-check": "tsc --noEmit",

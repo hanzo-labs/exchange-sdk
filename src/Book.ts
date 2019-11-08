@@ -1,5 +1,10 @@
 import FibonacciHeap from 'mnemonist/fibonacci-heap'
+import Order from './Order'
 
-let test = {}
+class Book {
+  /** test documentation */
+  test: string = '100'
+}
 
-export default test
+export default Book
+
