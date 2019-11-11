@@ -182,6 +182,15 @@ class Book {
    * @param order order to add
    */
   addOrder(order: Order): boolean {
+    // Market orders are the only orders that can be missing price
+    if (order.price.lessThan(0)) {
+      throw new Error('invalid negative price')
+    }
+
+    if (order.quantity.lessThanOrEqualTo(0)) {
+      throw new Error('invalid non-positive quantity')
+    }
+
     if (order.side === OrderSide.BID) {
       // error if market into empty opposing order queue
       if(this.askSize === 0 && order.type === OrderType.MARKET) {
@@ -278,7 +287,7 @@ class Book {
         primaryOrder = this.asks.pop() as Order
         secondaryOrder = this.bids.pop() as Order
       } else {
-        console.log('no spread')
+        console.log('no overlapping orders')
         break
       }
 

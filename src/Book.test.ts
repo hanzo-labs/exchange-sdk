@@ -154,6 +154,133 @@ test('Book computes spread', function() {
   expect(book.spread.equals(2)).toBe(true)
 })
 
+test('Book computes mean price', function() {
+  var book = new Book("testBook")
+
+  let o1 =  new Order(
+    'o1',
+    OrderSide.BID,
+    OrderType.LIMIT,
+    1,
+    4,
+  )
+
+  let o2 = new Order(
+    'o2',
+    OrderSide.ASK,
+    OrderType.LIMIT,
+    10,
+    6,
+  )
+
+  book.addOrder(o1)
+  book.addOrder(o2)
+
+  console.log(book.meanPrice)
+
+  expect(book.meanPrice.equals(5)).toBe(true)
+})
+
+test('Book cancel ask', () => {
+  let book = new Book('test')
+
+  let o1 =  new Order(
+    'o1',
+    OrderSide.ASK,
+    OrderType.LIMIT,
+    1,
+    1,
+  )
+
+  let o2 =  new Order(
+    'o2',
+    OrderSide.ASK,
+    OrderType.LIMIT,
+    1,
+    1,
+  )
+
+  book.addOrder(o1)
+
+  expect(book.cancelOrder(o1)).toBe(true)
+  expect(book.cancelOrder(o2)).toBe(false)
+})
+
+test('Book cancel bid', () => {
+  let book = new Book('test')
+
+  let o1 =  new Order(
+    'o1',
+    OrderSide.BID,
+    OrderType.LIMIT,
+    1,
+    1,
+  )
+
+  let o2 =  new Order(
+    'o2',
+    OrderSide.BID,
+    OrderType.LIMIT,
+    1,
+    1,
+  )
+
+  book.addOrder(o1)
+
+  expect(book.cancelOrder(o1)).toBe(true)
+  expect(book.cancelOrder(o2)).toBe(false)
+})
+
+test('Book settle cancel ask', () => {
+  let book = new Book('test')
+
+  let o1 =  new Order(
+    'o1',
+    OrderSide.ASK,
+    OrderType.LIMIT,
+    1,
+    1,
+  )
+
+  let o2 =  new Order(
+    'o2',
+    OrderSide.BID,
+    OrderType.MARKET,
+    1,
+  )
+
+  book.addOrder(o1)
+  book.addOrder(o1)
+
+  expect(book.cancelOrder(o1)).toBe(true)
+  expect(book.settle().length).toBe(0)
+})
+
+test('Book settle cancel bid', () => {
+  let book = new Book('test')
+
+  let o1 =  new Order(
+    'o1',
+    OrderSide.BID,
+    OrderType.LIMIT,
+    1,
+    1,
+  )
+
+  let o2 =  new Order(
+    'o2',
+    OrderSide.ASK,
+    OrderType.MARKET,
+    1,
+  )
+
+  book.addOrder(o1)
+  book.addOrder(o1)
+
+  expect(book.cancelOrder(o1)).toBe(true)
+  expect(book.settle().length).toBe(0)
+})
+
 test('Book reject single market order - ask', () => {
   let book = new Book('test')
 
@@ -180,6 +307,108 @@ test('Book reject single market order - bid', () => {
   )
 
   expect(() => book.addOrder(o1)).toThrow('no asks for market order')
+})
+
+test('Book reject negative price limit order - ask', () => {
+  let book = new Book('test')
+
+  let o1 =  new Order(
+    'o1',
+    OrderSide.ASK,
+    OrderType.LIMIT,
+    1,
+    -1,
+  )
+
+  let o2 =  new Order(
+    'o2',
+    OrderSide.ASK,
+    OrderType.LIMIT,
+    1,
+  )
+
+  expect(() => book.addOrder(o1)).toThrow('invalid negative price')
+  expect(() => book.addOrder(o2)).toThrow('only market orders can be missing price')
+})
+
+test('Book reject negative price limit order - bid', () => {
+  let book = new Book('test')
+
+  let o1 =  new Order(
+    'o1',
+    OrderSide.BID,
+    OrderType.LIMIT,
+    1,
+    -1,
+  )
+
+  let o2 =  new Order(
+    'o2',
+    OrderSide.BID,
+    OrderType.LIMIT,
+    1,
+  )
+
+  expect(() => book.addOrder(o1)).toThrow('invalid negative price')
+  expect(() => book.addOrder(o2)).toThrow('only market orders can be missing price')
+})
+
+test('Book reject 0 quantity order - ask', () => {
+  let book = new Book('test')
+
+  let o1 = new Order(
+    'o1',
+    OrderSide.ASK,
+    OrderType.LIMIT,
+    0,
+  )
+
+  expect(() => book.addOrder(o1)).toThrow('invalid non-positive quantity')
+})
+
+test('Book reject 0 quantity order - bid', () => {
+  let book = new Book('test')
+
+  let o1 = new Order(
+    'o1',
+    OrderSide.BID,
+    OrderType.LIMIT,
+    0,
+  )
+
+  expect(() => book.addOrder(o1)).toThrow('invalid non-positive quantity')
+})
+
+test('Book no overlapping spread', () => {
+  let book = new Book('test')
+
+  let o1 =  new Order(
+    'o1',
+    OrderSide.ASK,
+    OrderType.LIMIT,
+    1,
+    100,
+  )
+
+  let o2 = new Order(
+    'o2',
+    OrderSide.BID,
+    OrderType.LIMIT,
+    1,
+    1,
+  )
+
+  book.addOrder(o1)
+  book.addOrder(o2)
+
+  // only limit shows up as pending
+  expect(book.pendingOrderBook.size).toBe(2)
+
+  let trades = book.settle()
+  expect(trades.length).toBe(0)
+
+  let bids = book.orderBook
+  expect(bids.size).toBe(2)
 })
 
 test('Book Limit & Market order, same quantity ask first', () => {
@@ -802,7 +1031,6 @@ test('Book Limit & Aggressive Limit order, larger ask limit', () => {
   expect(o2.fillQuantity.equals(o2.quantity)).toBe(true)
 
   let trade = trades[0]
-  console.log(trade)
   expect(trade.matchedOrders.length).toBe(2)
   expect(trade.matchedOrders).toContain(o1)
   expect(trade.matchedOrders).toContain(o2)
