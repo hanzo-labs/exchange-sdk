@@ -17,6 +17,7 @@
     "@babel/plugin-proposal-object-rest-spread": "7.6.2",
     "@babel/preset-env": "7.6.2",
     "@babel/preset-typescript": "7.7.2",
+    "@types/jest": "24.0.22",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "24.9.0",
     "concurrently": "4.1.2",
@@ -33,7 +34,8 @@
     "rollup-plugin-visualizer": "2.7.2",
     "serve": "11.2.0",
     "source-map-explorer": "2.1.0",
-    "typedoc": "0.15.0",
+    "ts-jest": "24.1.0",
+    "typedoc": "github:TypeStrong/typedoc#5704bf5",
     "typedoc-plugin-markdown": "2.2.11",
     "typescript": "3.7.2"
   },
@@ -49,7 +51,7 @@
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
     "watch": "node_modules/.bin/concurrently 'npm run build:watch' 'node_modules/.bin/nodemon ./server.js --watch ./dist --ignore ./dist/index.esm.js --ignore ./dist/index.umd.js' 'node_modules/.bin/serve -l tcp://127.0.0.1'",
-    "test": "node_modules/.bin/jest && npm run build",
+    "test": "node_modules/.bin/jest",
     "test:coverage": "node_modules/.bin/jest --collect-coverage"
   },
   "renovate": {
@@ -74,6 +76,8 @@
     "defaults"
   ],
   "dependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "7.4.4",
+    "@babel/plugin-proposal-optional-chaining": "7.6.0",
     "@types/moment-timezone": "0.5.12",
     "@types/uuid": "3.4.6",
     "decimal.js": "10.2.0",

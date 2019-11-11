@@ -2,7 +2,7 @@
 
 # Enumeration: OrderStatus
 
-Status of the order
+status of the order
 
 ## Index
 
@@ -12,6 +12,9 @@ Status of the order
 * [FILLED](_order_.orderstatus.md#filled)
 * [PARTIALLY_FILLED](_order_.orderstatus.md#partially_filled)
 * [PARTIALLY_FILLED_CANCELLED](_order_.orderstatus.md#partially_filled_cancelled)
+* [PARTIALLY_FILLED_REMAINDER_REJECTED](_order_.orderstatus.md#partially_filled_remainder_rejected)
+* [REMAINDER](_order_.orderstatus.md#remainder)
+* [REMAINDER_REJECTED](_order_.orderstatus.md#remainder_rejected)
 * [UNFILLED](_order_.orderstatus.md#unfilled)
 
 ## Enumeration members
@@ -20,9 +23,9 @@ Status of the order
 
 • **CANCELLED**:
 
-*Defined in [Order.ts:42](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L42)*
+*Defined in [Order.ts:60](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L60)*
 
-Cancelled order
+cancelled order
 
 ___
 
@@ -30,9 +33,9 @@ ___
 
 • **FILLED**:
 
-*Defined in [Order.ts:34](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L34)*
+*Defined in [Order.ts:52](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L52)*
 
-Fully filled order
+fully filled order
 
 ___
 
@@ -40,9 +43,9 @@ ___
 
 • **PARTIALLY_FILLED**:
 
-*Defined in [Order.ts:30](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L30)*
+*Defined in [Order.ts:48](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L48)*
 
-Partially filled order
+partially filled order
 
 ___
 
@@ -50,9 +53,39 @@ ___
 
 • **PARTIALLY_FILLED_CANCELLED**:
 
-*Defined in [Order.ts:38](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L38)*
+*Defined in [Order.ts:56](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L56)*
 
-Partially filled but cancelled order
+partially filled but cancelled order
+
+___
+
+###  PARTIALLY_FILLED_REMAINDER_REJECTED
+
+• **PARTIALLY_FILLED_REMAINDER_REJECTED**:
+
+*Defined in [Order.ts:64](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L64)*
+
+partially filled but remainder rejected
+
+___
+
+###  REMAINDER
+
+• **REMAINDER**:
+
+*Defined in [Order.ts:44](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L44)*
+
+unfilled left over order from a partial fill
+
+___
+
+###  REMAINDER_REJECTED
+
+• **REMAINDER_REJECTED**:
+
+*Defined in [Order.ts:68](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L68)*
+
+remainder rejected
 
 ___
 
@@ -60,6 +93,6 @@ ___
 
 • **UNFILLED**:
 
-*Defined in [Order.ts:26](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L26)*
+*Defined in [Order.ts:40](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L40)*
 
-Unfilled order (default state)
+unfilled order (default state)

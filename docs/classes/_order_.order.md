@@ -2,7 +2,7 @@
 
 # Class: Order
 
-Represents an order that's put in a book
+represents an order that's put in a book
 
 ## Hierarchy
 
@@ -16,60 +16,83 @@ Represents an order that's put in a book
 
 ### Properties
 
-* [amount](_order_.order.md#amount)
 * [createdAt](_order_.order.md#createdat)
+* [externalId](_order_.order.md#externalid)
+* [fillQuantity](_order_.order.md#fillquantity)
 * [id](_order_.order.md#id)
 * [price](_order_.order.md#price)
+* [quantity](_order_.order.md#quantity)
+* [side](_order_.order.md#side)
 * [status](_order_.order.md#status)
 * [type](_order_.order.md#type)
+
+### Methods
+
+* [clone](_order_.order.md#clone)
 
 ## Constructors
 
 ###  constructor
 
-\+ **new Order**(`type`: [OrderType](../enums/_order_.ordertype.md), `price`: number | string | Decimal, `amount`: number | string | Decimal): *[Order](_order_.order.md)*
+\+ **new Order**(`externalId`: string, `side`: [OrderSide](../enums/_order_.orderside.md), `type`: [OrderType](../enums/_order_.ordertype.md), `quantity`: number | string | Decimal, `price`: number | string | Decimal, `fillQuantity`: number | string | Decimal, `createdAt`: number): *[Order](_order_.order.md)*
 
-*Defined in [Order.ts:72](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L72)*
+*Defined in [Order.ts:118](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L118)*
+
+order constructor
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`type` | [OrderType](../enums/_order_.ordertype.md) |
-`price` | number &#124; string &#124; Decimal |
-`amount` | number &#124; string &#124; Decimal |
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`externalId` | string | - | id of order from another system |
+`side` | [OrderSide](../enums/_order_.orderside.md) | - | - |
+`type` | [OrderType](../enums/_order_.ordertype.md) | - | type of this order |
+`quantity` | number &#124; string &#124; Decimal | 0 | quantity involved in this order  |
+`price` | number &#124; string &#124; Decimal | 0 | price of this order |
+`fillQuantity` | number &#124; string &#124; Decimal | 0 | - |
+`createdAt` | number |  time().unix() | - |
 
 **Returns:** *[Order](_order_.order.md)*
 
 ## Properties
 
-###  amount
-
-• **amount**: *Decimal*
-
-*Defined in [Order.ts:68](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L68)*
-
-Order size
-
-___
-
 ###  createdAt
 
 • **createdAt**: *number*
 
-*Defined in [Order.ts:72](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L72)*
+*Defined in [Order.ts:118](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L118)*
 
-Unix time
+unix creation time
+
+___
+
+###  externalId
+
+• **externalId**: *string*
+
+*Defined in [Order.ts:83](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L83)*
+
+id from an external system
+
+___
+
+###  fillQuantity
+
+• **fillQuantity**: *Decimal*
+
+*Defined in [Order.ts:113](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L113)*
+
+amount filled
 
 ___
 
 ###  id
 
-• **id**: *string*
+• **id**: *string* =  uuid.v4()
 
-*Defined in [Order.ts:52](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L52)*
+*Defined in [Order.ts:78](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L78)*
 
-Unique order id
+unique order id
 
 ___
 
@@ -77,9 +100,29 @@ ___
 
 • **price**: *Decimal*
 
-*Defined in [Order.ts:64](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L64)*
+*Defined in [Order.ts:103](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L103)*
 
-Bid/Ask price
+bid/ask price
+
+___
+
+###  quantity
+
+• **quantity**: *Decimal*
+
+*Defined in [Order.ts:108](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L108)*
+
+order size
+
+___
+
+###  side
+
+• **side**: *[OrderSide](../enums/_order_.orderside.md)*
+
+*Defined in [Order.ts:88](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L88)*
+
+side of the order
 
 ___
 
@@ -87,9 +130,9 @@ ___
 
 • **status**: *[OrderStatus](../enums/_order_.orderstatus.md)* =  OrderStatus.UNFILLED
 
-*Defined in [Order.ts:60](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L60)*
+*Defined in [Order.ts:98](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L98)*
 
-Status of the order
+status of the order
 
 ___
 
@@ -97,6 +140,18 @@ ___
 
 • **type**: *[OrderType](../enums/_order_.ordertype.md)*
 
-*Defined in [Order.ts:56](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L56)*
+*Defined in [Order.ts:93](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L93)*
 
-Type of the order
+type of the order
+
+## Methods
+
+###  clone
+
+▸ **clone**(): *[Order](_order_.order.md)*
+
+*Defined in [Order.ts:140](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L140)*
+
+**Returns:** *[Order](_order_.order.md)*
+
+return a clone of this order

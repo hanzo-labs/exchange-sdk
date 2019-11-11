@@ -2,7 +2,7 @@
 
 # Enumeration: OrderType
 
-Type of the order
+type of the order
 
 ## Index
 
@@ -17,9 +17,9 @@ Type of the order
 
 • **LIMIT**:
 
-*Defined in [Order.ts:12](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L12)*
+*Defined in [Order.ts:26](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L26)*
 
-Limit order
+limit order
 
 ___
 
@@ -27,6 +27,6 @@ ___
 
 • **MARKET**:
 
-*Defined in [Order.ts:16](https://github.com/hanzoai/matching-engine/blob/9af2d1b/src/Order.ts#L16)*
+*Defined in [Order.ts:30](https://github.com/hanzoai/matching-engine/blob/0c1f67f/src/Order.ts#L30)*
 
-Market order
+market order

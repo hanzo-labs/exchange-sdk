@@ -6,6 +6,7 @@
 
 ### Enumerations
 
+* [OrderSide](../enums/_order_.orderside.md)
 * [OrderStatus](../enums/_order_.orderstatus.md)
 * [OrderType](../enums/_order_.ordertype.md)
 

@@ -3,79 +3,141 @@ import time from './utils/time'
 import Decimal from 'decimal.js'
 
 /**
- * Type of the order
+ * side of the order
+ */
+export enum OrderSide {
+  /**
+   * ask order
+   */
+  ASK,
+  /**
+   * bid order
+   */
+  BID,
+}
+
+/**
+ * type of the order
  */
 export enum OrderType {
   /**
-   * Limit order
+   * limit order
    */
   LIMIT,
   /**
-   * Market order
+   * market order
    */
   MARKET,
 }
 
 /**
- * Status of the order
+ * status of the order
  */
 export enum OrderStatus {
   /**
-   * Unfilled order (default state)
+   * unfilled order (default state)
    */
   UNFILLED,
   /**
-   * Partially filled order
+   * unfilled left over order from a partial fill
+   */
+  REMAINDER,
+  /**
+   * partially filled order
    */
   PARTIALLY_FILLED,
   /**
-   * Fully filled order
+   * fully filled order
    */
   FILLED,
   /**
-   * Partially filled but cancelled order
+   * partially filled but cancelled order
    */
   PARTIALLY_FILLED_CANCELLED,
   /**
-   * Cancelled order
+   * cancelled order
    */
   CANCELLED,
+  /**
+   * partially filled but remainder rejected
+   */
+  PARTIALLY_FILLED_REMAINDER_REJECTED,
+  /**
+   * remainder rejected
+   */
+  REMAINDER_REJECTED,
 }
 
 /**
- * Represents an order that's put in a book
+ * represents an order that's put in a book
  */
 export default class Order {
   /**
-   * Unique order id
+   * unique order id
    */
-  id: string
+  id: string = uuid.v4()
+
   /**
-   * Type of the order
+   * id from an external system
+   */
+  externalId: string
+
+  /**
+   * side of the order
+   */
+  side: OrderSide
+
+  /**
+   * type of the order
    */
   type: OrderType
+
   /**
-   * Status of the order
+   * status of the order
    */
   status: OrderStatus = OrderStatus.UNFILLED
+
   /**
-   * Bid/Ask price
+   * bid/ask price
    */
   price: Decimal
+
   /**
-   * Order size
+   * order size
    */
-  amount: Decimal
+  quantity: Decimal
+
   /**
-   * Unix time
+   * amount filled
+   */
+  fillQuantity: Decimal
+
+  /**
+   * unix creation time
    */
   createdAt: number
 
-  constructor(type: OrderType, price: number | string | Decimal, amount: number | string | Decimal) {
-    this.id = uuid.v4()
+  /**
+   * order constructor
+   * @param externalId id of order from another system
+   * @param type type of this order
+   * @param price price of this order
+   * @param quantity quantity involved in this order
+   */
+  constructor(externalId: string, side: OrderSide, type: OrderType, quantity: number | string | Decimal = 0, price: number | string | Decimal = 0, fillQuantity: number | string | Decimal = 0, createdAt: number = time().unix()) {
+    this.externalId = externalId
+    this.side = side
     this.type = type
+    this.quantity = new Decimal(quantity)
     this.price = new Decimal(price)
-    this.amount = new Decimal(amount)
-    this.createdAt = time().unix()
+    this.fillQuantity = new Decimal(fillQuantity)
+    this.createdAt = createdAt
+  }
+
+  /**
+   * @return return a clone of this order
+   */
+  clone(): Order {
+    return new Order(this.externalId, this.side, this.type, this.quantity, this.price)
   }
 }

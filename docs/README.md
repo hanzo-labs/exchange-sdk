@@ -4,7 +4,7 @@
 
 # 📚 Non-Production Typescript Matching Engine
 
-> Basic Matching Engine based on [Ian Kaplan's Paper](https://github.com/IanLKaplan/matchingEngine/wiki/Market-Order-Matching-Engines)
+> Basic Matching Engine based on [hyobyun/exchangeengine](https://github.com/hyobyun/exchangeengine) and [Ian Kaplan's Paper](https://github.com/IanLKaplan/matchingEngine/wiki/Market-Order-Matching-Engines)
 
 ## Running tests
 
