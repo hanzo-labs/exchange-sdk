@@ -143,7 +143,6 @@ class Book {
     do {
       order = this.asks.peek()
       if (order && !this.activeOrders.has(order.id)) {
-        console.log('why', order.id, order)
         this.asks.pop()
       } else {
         break
@@ -163,7 +162,6 @@ class Book {
     do {
       order = this.bids.peek()
       if (order && !this.activeOrders.has(order.id)) {
-        console.log('why', order.id, order, this.activeOrders)
         this.bids.pop()
       } else {
         break
