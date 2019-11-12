@@ -18,7 +18,7 @@
 
 Ƭ **Time**: *Moment*
 
-*Defined in [utils/time.ts:3](https://github.com/hanzoai/matching-engine/blob/ece9147/src/utils/time.ts#L3)*
+*Defined in [utils/time.ts:3](https://github.com/hanzoai/matching-engine/blob/5ee0adf/src/utils/time.ts#L3)*
 
 ## Functions
 
@@ -26,7 +26,7 @@
 
 ▸ **default**(...`args`: any[]): *Moment*
 
-*Defined in [utils/time.ts:3](https://github.com/hanzoai/matching-engine/blob/ece9147/src/utils/time.ts#L3)*
+*Defined in [utils/time.ts:3](https://github.com/hanzoai/matching-engine/blob/5ee0adf/src/utils/time.ts#L3)*
 
 Initializes a moment.js object and converts it to Pacific time immediately so
 unix time is always rendered correctly.

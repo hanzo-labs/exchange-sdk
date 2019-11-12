@@ -26,8 +26,8 @@ for (let i = 0; i < 10000; i++) {
       'rnd' + i,
       random.boolean() ? OrderSide.ASK : OrderSide.BID,
       random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
-      100 * exp(),
-      100 * nrm() + 50,
+      Math.round(100 * exp()),
+      Math.round(100 * nrm() + 50),
       0,
       t += 1000,
     ))
@@ -68,8 +68,8 @@ const ctx = testBook.start((tb, trades) => {
       'rnd',
       random.boolean() ? OrderSide.ASK : OrderSide.BID,
       random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
-      10 * exp(),
-      10 * nrm() + testBook.meanPrice.toNumber(),
+      Math.round(10 * exp()),
+      Math.round(10 * nrm() + testBook.meanPrice.toNumber()),
     ))
   } catch(e) {
   }
