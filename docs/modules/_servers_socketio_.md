@@ -14,7 +14,7 @@
 
 ▸ **createSocketIO**(`book`: [Book](../classes/_book_.book.md), `http`: Server): *void*
 
-*Defined in [servers/socketio.ts:8](https://github.com/hanzoai/matching-engine/blob/4557e9b/src/servers/socketio.ts#L8)*
+*Defined in [servers/socketio.ts:8](https://github.com/hanzoai/matching-engine/blob/ece9147/src/servers/socketio.ts#L8)*
 
 **Parameters:**
 
