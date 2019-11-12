@@ -58,18 +58,7 @@ export default function createHttp (books: Map<string, Book>, candleTrees: Map<s
     let asks = []
     let isBid = true
 
-    for (let [k, v] of book.orderBook.entries()) {
-      if (isBid && book.meanPrice.lessThanOrEqualTo(k)) {
-        isBid = false
-      }
-
-      if (isBid) {
-        bids.push([k, v])
-      } else {
-        asks.push([k, v])
-      }
-    }
-    res.status(200).json({ bids, asks })
+    res.status(200).json(book.orderBook)
   }
 
   app.get('/:name/orders', getOrderBook)

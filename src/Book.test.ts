@@ -34,11 +34,13 @@ describe('Book', () => {
     let trades = book.settle()
     expect(trades.length).toBe(0)
 
-    let bids = book.orderBook
-    let keys = Array.from(bids.keys())
+    let ob = book.orderBook
+    expect(ob.asks.length).toBe(2)
+    expect(ob.bids.length).toBe(0)
 
-    expect(keys[0]).toBe('1')
-    expect(keys[1]).toBe('2')
+    let asks = ob.asks
+    expect(asks[0][0]).toBe('1')
+    expect(asks[1][0]).toBe('2')
   })
 
   test('bid order sorting is correct (pricing)', () => {
@@ -65,11 +67,13 @@ describe('Book', () => {
     let trades = book.settle()
     expect(trades.length).toBe(0)
 
-    let bids = book.orderBook
-    let keys = Array.from(bids.keys())
+    let ob = book.orderBook
+    expect(ob.bids.length).toBe(2)
+    expect(ob.asks.length).toBe(0)
 
-    expect(keys[0]).toBe('1')
-    expect(keys[1]).toBe('2')
+    let bids = ob.bids
+    expect(bids[0][0]).toBe('1')
+    expect(bids[1][0]).toBe('2')
   })
 
   test('ask order stacking is correct (quantity)', () => {
@@ -96,9 +100,10 @@ describe('Book', () => {
     let trades = book.settle()
     expect(trades.length).toBe(0)
 
-    let bids = book.orderBook
-
-    expect(bids.get('1')?.equals(4)).toBe(true)
+    let ob = book.orderBook
+    expect(ob.asks.length).toBe(1)
+    expect(ob.bids.length).toBe(0)
+    expect(ob.asks[0]).toEqual(['1', '4'])
   })
 
   test('bid order stacking is correct (quantity)', () => {
@@ -125,9 +130,10 @@ describe('Book', () => {
     let trades = book.settle()
     expect(trades.length).toBe(0)
 
-    let bids = book.orderBook
-
-    expect(bids.get('1')?.equals(4)).toBe(true)
+    let ob = book.orderBook
+    expect(ob.bids.length).toBe(1)
+    expect(ob.asks.length).toBe(0)
+    expect(ob.bids[0]).toEqual(['1', '4'])
   })
 
   test('computes spread', function() {
@@ -407,8 +413,11 @@ describe('Book', () => {
     let trades = book.settle()
     expect(trades.length).toBe(0)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(2)
+    let ob = book.orderBook
+    expect(ob.asks.length).toBe(1)
+    expect(ob.bids.length).toBe(1)
+    expect(ob.asks[0]).toEqual(['100', '1'])
+    expect(ob.bids[0]).toEqual(['1', '1'])
   })
 
   test('Limit & Market order, same quantity ask first', () => {
@@ -450,8 +459,9 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o1.price)).toBe(true)
     expect(trade.fillQuantity.equals(o2.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(0)
+    let ob = book.orderBook
+    expect(ob.asks.length).toBe(0)
+    expect(ob.bids.length).toBe(0)
   })
 
   test('Limit & Market order, same quantity bid first', () => {
@@ -493,8 +503,9 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o1.price)).toBe(true)
     expect(trade.fillQuantity.equals(o2.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(0)
+    let ob = book.orderBook
+    expect(ob.asks.length).toBe(0)
+    expect(ob.bids.length).toBe(0)
   })
 
   test('Single market bid order should reject', () => {
@@ -568,9 +579,10 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o1.price)).toBe(true)
     expect(trade.fillQuantity.equals(o2.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get('10')?.equals(o1.quantity.sub(o2.quantity))).toBe(true)
+    let ob = book.orderBook
+    expect(ob.asks.length).toBe(1)
+    expect(ob.bids.length).toBe(0)
+    expect(ob.asks[0]).toEqual(['10', o1.quantity.sub(o2.quantity).toString()])
   })
 
   test('Limit & Market order, larger bid limit', () => {
@@ -616,9 +628,10 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o1.price)).toBe(true)
     expect(trade.fillQuantity.equals(o2.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get('10')?.equals(o1.quantity.sub(o2.quantity))).toBe(true)
+    let ob = book.orderBook
+    expect(ob.bids.length).toBe(1)
+    expect(ob.asks.length).toBe(0)
+    expect(ob.bids[0]).toEqual(['10', o1.quantity.sub(o2.quantity).toString()])
   })
 
   test('Limit & Market order, larger market sitting ask', () => {
@@ -665,8 +678,9 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o1.price)).toBe(true)
     expect(trade.fillQuantity.equals(o1.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(0)
+    let ob = book.orderBook
+    expect(ob.asks.length).toEqual(0)
+    expect(ob.bids.length).toEqual(0)
   })
 
   test('Limit & Market order, larger market sitting bid', () => {
@@ -713,8 +727,9 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o1.price)).toBe(true)
     expect(trade.fillQuantity.equals(o1.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(0)
+    let ob = book.orderBook
+    expect(ob.asks.length).toEqual(0)
+    expect(ob.bids.length).toEqual(0)
   })
 
   test('Limit & Market order, larger market sitting asks', () => {
@@ -782,8 +797,9 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o3.price)).toBe(true)
     expect(trade.fillQuantity.equals(o3.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(0)
+    let ob = book.orderBook
+    expect(ob.asks.length).toEqual(0)
+    expect(ob.bids.length).toEqual(0)
   })
 
   test('Limit & Market order, larger market sitting bids', () => {
@@ -851,8 +867,9 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o3.price)).toBe(true)
     expect(trade.fillQuantity.equals(o3.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(0)
+    let ob = book.orderBook
+    expect(ob.asks.length).toEqual(0)
+    expect(ob.bids.length).toEqual(0)
   })
 
   test('Limit & Market order, smaller market sitting asks', () => {
@@ -921,9 +938,10 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o3.price)).toBe(true)
     expect(trade.fillQuantity.equals(remainderQuantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get(o3.price.toString())?.equals(remainderQuantity)).toBe(true)
+    let ob = book.orderBook
+    expect(ob.asks.length).toBe(1)
+    expect(ob.bids.length).toBe(0)
+    expect(ob.asks[0]).toEqual([o3.price.toString(), remainderQuantity.toString()])
   })
 
   test('Limit & Market order, smaller market sitting bids', () => {
@@ -992,9 +1010,10 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o3.price)).toBe(true)
     expect(trade.fillQuantity.equals(remainderQuantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get(o3.price.toString())?.equals(remainderQuantity)).toBe(true)
+    let ob = book.orderBook
+    expect(ob.bids.length).toBe(1)
+    expect(ob.asks.length).toBe(0)
+    expect(ob.bids[0]).toEqual([o3.price.toString(), remainderQuantity.toString()])
   })
 
   /* --- aggressive limit orders --- */
@@ -1043,9 +1062,10 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o2.price)).toBe(true)
     expect(trade.fillQuantity.equals(o2.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get(o1.price.toString())?.equals(o1.quantity.sub(o2.quantity))).toBe(true)
+    let ob = book.orderBook
+    expect(ob.asks.length).toBe(1)
+    expect(ob.bids.length).toBe(0)
+    expect(ob.asks[0]).toEqual([o1.price.toString(), o1.quantity.sub(o2.quantity).toString()])
   })
 
   test('Limit & Aggressive Limit order, larger bid limit', () => {
@@ -1092,9 +1112,10 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o2.price)).toBe(true)
     expect(trade.fillQuantity.equals(o2.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get(o1.price.toString())?.equals(o1.quantity.sub(o2.quantity))).toBe(true)
+    let ob = book.orderBook
+    expect(ob.bids.length).toBe(1)
+    expect(ob.asks.length).toBe(0)
+    expect(ob.bids[0]).toEqual([o1.price.toString(), o1.quantity.sub(o2.quantity).toString()])
   })
 
   test('Limit & Aggressive Limit order, larger limit sitting ask', () => {
@@ -1141,9 +1162,10 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o1.price)).toBe(true)
     expect(trade.fillQuantity.equals(o1.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get(o2.price.toString())?.equals(o2.quantity.sub(o1.quantity))).toBe(true)
+    let ob = book.orderBook
+    expect(ob.bids.length).toBe(1)
+    expect(ob.asks.length).toBe(0)
+    expect(ob.bids[0]).toEqual([o2.price.toString(), o2.quantity.sub(o1.quantity).toString()])
   })
 
   test('Limit & Aggressive Limit order, larger limit sitting bid', () => {
@@ -1190,9 +1212,10 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o1.price)).toBe(true)
     expect(trade.fillQuantity.equals(o1.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get(o2.price.toString())?.equals(o2.quantity.sub(o1.quantity))).toBe(true)
+    let ob = book.orderBook
+    expect(ob.asks.length).toBe(1)
+    expect(ob.bids.length).toBe(0)
+    expect(ob.asks[0]).toEqual([o2.price.toString(), o2.quantity.sub(o1.quantity).toString()])
   })
 
   test('Limit & Aggressive Limit order, larger market sitting asks', () => {
@@ -1260,9 +1283,10 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o3.price)).toBe(true)
     expect(trade.fillQuantity.equals(o3.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get(o2.price.toString())?.equals(o2.quantity.sub(o1.quantity).sub(o3.quantity))).toBe(true)
+    let ob = book.orderBook
+    expect(ob.bids.length).toBe(1)
+    expect(ob.asks.length).toBe(0)
+    expect(ob.bids[0]).toEqual([o2.price.toString(), o2.quantity.sub(o1.quantity).sub(o3.quantity).toString()])
   })
 
   test('Limit & Aggressive Limit order, larger market sitting bids', () => {
@@ -1330,9 +1354,10 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o3.price)).toBe(true)
     expect(trade.fillQuantity.equals(o3.quantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get(o2.price.toString())?.equals(o2.quantity.sub(o1.quantity).sub(o3.quantity))).toBe(true)
+    let ob = book.orderBook
+    expect(ob.asks.length).toBe(1)
+    expect(ob.bids.length).toBe(0)
+    expect(ob.asks[0]).toEqual([o2.price.toString(), o2.quantity.sub(o1.quantity).sub(o3.quantity).toString()])
   })
 
   test('Limit & Aggressive Limit order, smaller market sitting asks', () => {
@@ -1402,9 +1427,10 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o2.price)).toBe(true)
     expect(trade.fillQuantity.equals(remainderQuantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get(o3.price.toString())?.equals(remainderQuantity)).toBe(true)
+    let ob = book.orderBook
+    expect(ob.asks.length).toBe(1)
+    expect(ob.bids.length).toBe(0)
+    expect(ob.asks[0]).toEqual([o3.price.toString(), remainderQuantity.toString()])
   })
 
   test('Limit & Aggressive Limit order, smaller market sitting bids', () => {
@@ -1474,8 +1500,9 @@ describe('Book', () => {
     expect(trade.fillPrice.equals(o2.price)).toBe(true)
     expect(trade.fillQuantity.equals(remainderQuantity)).toBe(true)
 
-    let bids = book.orderBook
-    expect(bids.size).toBe(1)
-    expect(bids.get(o3.price.toString())?.equals(remainderQuantity)).toBe(true)
+    let ob = book.orderBook
+    expect(ob.bids.length).toBe(1)
+    expect(ob.asks.length).toBe(0)
+    expect(ob.bids[0]).toEqual([o3.price.toString(), remainderQuantity.toString()])
   })
 })

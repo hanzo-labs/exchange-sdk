@@ -31,6 +31,7 @@ for (let i = 0; i < 10000; i++) {
       0,
       t += 1000,
     ))
+
     let trades = testBook.settle()
     for (let trade of trades) {
       trade.executedAt = t

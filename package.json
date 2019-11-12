@@ -52,7 +52,7 @@
     "build:watch": "node_modules/.bin/rollup -c -w",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "watch": "node_modules/.bin/concurrently 'npm run build:watch' 'node_modules/.bin/nodemon 'node_modules/.bin/ts-node server.ts' --watch ./dist --ignore ./dist/index.esm.js --ignore ./dist/index.umd.js' 'node_modules/.bin/serve -l tcp://127.0.0.1'",
+    "watch": "node_modules/.bin/concurrently 'npm run build:watch' 'node_modules/.bin/nodemon server.js --watch ./src' 'node_modules/.bin/serve -l tcp://127.0.0.1'",
     "test": "node_modules/.bin/jest",
     "test:coverage": "node_modules/.bin/jest --collect-coverage",
     "serve": "npm run build:js && node -r source-map-support/register ./server.js"

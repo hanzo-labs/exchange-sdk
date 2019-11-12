@@ -2,9 +2,18 @@ import uuid from 'uuid'
 import Decimal from 'decimal.js'
 import requestAnimationFrame from 'raf'
 import FibonacciHeap from 'mnemonist/fibonacci-heap'
+import AVLTree from 'avl'
 
 import Order, { OrderStatus, OrderType, OrderSide } from './Order'
 import Trade from './Trade'
+
+/**
+ * interface for the orderbook
+ */
+export interface OrderBook {
+  asks: [string, string][],
+  bids: [string, string][],
+}
 
 /**
  * sorts array by natural order of string
@@ -40,9 +49,14 @@ export const askComparator = function(a: Order, b: Order) {
 }
 
 /**
+ * a avl tree of order price strings to decimals
+ */
+export type OrderBookTree = AVLTree<string, Decimal>
+
+/**
  * a map of order price strings to decimals
  */
-export type OrderBook = Map<string, Decimal>
+export type OrderBookMap = Map<string, Decimal>
 
 /**
  * a priorty queue of orders
@@ -86,11 +100,18 @@ class Book {
    */
   bids: OrderHeap = new FibonacciHeap<Order>(bidComparator)
 
-  // TODO: split into bid and ask books
   /**
    * this keeps track of the current orderbook as a map of prices to volumes
    */
-  private _orderBook: OrderBook = new Map<string, Decimal>()
+  private _orderBook: OrderBookTree = new AVLTree<string, Decimal>(naturalOrderCollator.compare)
+
+  /**
+   * this keeps track of the rendered orderbook
+   */
+  private _renderedOrderBook: OrderBook = {
+    bids: [],
+    asks: [],
+  }
 
   /**
    * cached mean price, can only safely be taken after a settle
@@ -99,7 +120,7 @@ class Book {
   /**
    * this is a list of pending orders that is merged into the existing orderbook on settle
    */
-  pendingOrderBook: OrderBook = new Map<string, Decimal>()
+  pendingOrderBook: OrderBookMap = new Map<string, Decimal>()
 
   /**
    * this keeps track of all the orders so updating status and cancellation is
@@ -175,7 +196,7 @@ class Book {
    * @return returns the current orderbook (readonly)
    */
   get orderBook(): OrderBook {
-    return this._orderBook
+    return this._renderedOrderBook
   }
 
   /**
@@ -277,13 +298,12 @@ class Book {
    * settle the order book by executing overlapping trades
    */
   settle(): Trade[] {
-    let _this = this
     let trades = []
 
     do  {
       // break if one of the books is empty
       if (this.bids.size === 0 || this.asks.size === 0 || this.activeOrders.size <= 1) {
-        console.log('no orders on atleast one side')
+        // console.log('no orders on atleast one side')
         break
       }
 
@@ -302,7 +322,7 @@ class Book {
         primaryOrder = this.asks.pop() as Order
         secondaryOrder = this.bids.pop() as Order
       } else {
-        console.log('no overlapping orders')
+        // console.log('no overlapping orders')
         break
       }
 
@@ -341,7 +361,7 @@ class Book {
 
           newOrder.status = OrderStatus.REMAINDER_REJECTED
 
-          console.log(`could not add order ${ marketOrder.id }`)
+          // console.log(`could not add order ${ marketOrder.id }`)
           rejectedOrders.push(newOrder)
         }
       // Exact match
@@ -396,24 +416,69 @@ class Book {
 
     // Merge pending into order book
     this.pendingOrderBook.forEach((v: Decimal, k: string) => {
-      const quantity = this.orderBook.get(k) || new Decimal(0)
-      this._orderBook.set(k, v.add(quantity))
+      const quantity = this._orderBook.find(k)
+      if (quantity) {
+        let val = v.add(quantity.data as Decimal)
+        if (val.equals(0)) {
+          this._orderBook.remove(k)
+        } else {
+          quantity.data = val
+        }
+      } else if (!v.equals(0)) {
+        this._orderBook.insert(k, v)
+      }
     })
 
     this.pendingOrderBook.clear()
 
-    let keys = Array.from(this.orderBook.keys()).sort(naturalOrderCollator.compare)
-    let newOrderBook = new Map<string, Decimal>()
+    // Generate cached rendered order book
+    let askPrice = this.nearestAsk()?.price
+    let bidPrice = this.nearestBid()?.price
 
-    for (let key of keys) {
-      let q = this.orderBook.get(key) as Decimal
-      if (!q.equals(0)) {
-        newOrderBook.set(key, q)
+    this._renderedOrderBook.asks.length = 0
+    this._renderedOrderBook.bids.length = 0
+
+    if (bidPrice && askPrice) {
+      this._meanPrice = askPrice.add(bidPrice).div(2)
+
+      let isBids = true
+
+      // split into bids and asks
+      let vs = this._orderBook.values()
+      let ks = this._orderBook.keys()
+      for (let k in ks) {
+        let p = ks[k]
+        if (isBids && this._meanPrice.lessThan(p)) {
+          isBids = false
+        }
+
+        if (isBids) {
+          this._renderedOrderBook.bids.push([p, vs[k].toString()])
+        } else {
+          this._renderedOrderBook.asks.push([p, vs[k].toString()])
+        }
       }
-    }
+    } else if (askPrice) {
+      this._meanPrice = askPrice
 
-    this._orderBook = newOrderBook
-    this._meanPrice = this.nearestAsk()?.price.add(this.nearestBid()?.price ?? 0).div(2) ?? new Decimal(0)
+      let vs = this._orderBook.values()
+      let ks = this._orderBook.keys()
+      for (let k in ks) {
+        let p = ks[k]
+        this._renderedOrderBook.asks.push([p, vs[k].toString()])
+      }
+    } else if (bidPrice) {
+      this._meanPrice = bidPrice
+
+      let vs = this._orderBook.values()
+      let ks = this._orderBook.keys()
+      for (let k in ks) {
+        let p = ks[k]
+        this._renderedOrderBook.bids.push([p, vs[k].toString()])
+      }
+    } else {
+      this._meanPrice = new Decimal(0)
+    }
 
     // TODO: handle cancellations
 
