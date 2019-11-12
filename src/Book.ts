@@ -1,7 +1,8 @@
 import uuid from 'uuid'
 import Decimal from 'decimal.js'
-
+import requestAnimationFrame from 'raf'
 import FibonacciHeap from 'mnemonist/fibonacci-heap'
+
 import Order, { OrderStatus, OrderType, OrderSide } from './Order'
 import Trade from './Trade'
 
@@ -39,15 +40,26 @@ export const askComparator = function(a: Order, b: Order) {
 }
 
 /**
- * a map of order price strings to Decimals
+ * a map of order price strings to decimals
  */
-type OrderBook = Map<string, Decimal>
+export type OrderBook = Map<string, Decimal>
 
 /**
- * a map of order price strings to Decimals
+ * a priorty queue of orders
  */
-type OrderHeap = FibonacciHeap<Order>
-type OrderMap  = Map<string, Order>
+export type OrderHeap = FibonacciHeap<Order>
+
+/**
+ * a map of order price strings to decimals
+ */
+export type OrderMap  = Map<string, Order>
+
+/**
+ * Object representing continuing execution
+ */
+export interface ExecutionContext {
+  stop: () => void
+}
 
 /**
  * order book for keeping track of and settling orders
@@ -74,11 +86,16 @@ class Book {
    */
   bids: OrderHeap = new FibonacciHeap<Order>(bidComparator)
 
+  // TODO: split into bid and ask books
   /**
    * this keeps track of the current orderbook as a map of prices to volumes
    */
   private _orderBook: OrderBook = new Map<string, Decimal>()
 
+  /**
+   * cached mean price, can only safely be taken after a settle
+   */
+  private _meanPrice: Decimal = new Decimal(0)
   /**
    * this is a list of pending orders that is merged into the existing orderbook on settle
    */
@@ -178,8 +195,8 @@ class Book {
   }
 
   /**
-   * Insert an order into the order book or throw an error
-   * @param order order to add
+   * Insert an order into the order book
+   * @param order order to add or throw an error
    */
   addOrder(order: Order): boolean {
     // Market orders are the only orders that can be missing price
@@ -255,7 +272,7 @@ class Book {
   }
 
   get meanPrice(): Decimal {
-    return this.nearestAsk()?.price.add(this.nearestBid()?.price ?? 0).div(2) ?? new Decimal(0)
+    return this._meanPrice
   }
 
   /**
@@ -381,9 +398,11 @@ class Book {
 
     // Merge pending into order book
     this.pendingOrderBook.forEach((v: Decimal, k: string) => {
-      let quantity = this.orderBook.get(k) || new Decimal(0)
+      const quantity = this.orderBook.get(k) || new Decimal(0)
       this._orderBook.set(k, v.add(quantity))
     })
+
+    this.pendingOrderBook.clear()
 
     let keys = Array.from(this.orderBook.keys()).sort(naturalOrderCollator.compare)
     let newOrderBook = new Map<string, Decimal>()
@@ -396,10 +415,34 @@ class Book {
     }
 
     this._orderBook = newOrderBook
+    this._meanPrice = this.nearestAsk()?.price.add(this.nearestBid()?.price ?? 0).div(2) ?? new Decimal(0)
 
     // TODO: handle cancellations
 
     return trades
+  }
+
+  /**
+   * start executing settle repeatedly, only run once
+   * @param settleFn function that executes with the return value of settle
+   * @return return an ExecutionContext with a stop function
+   */
+  start(settleFn: (b: Book, t: Trade[]) => void = () => {}): ExecutionContext {
+    let stop = false
+    const fn = () => {
+      if (!stop) {
+        settleFn(this, this.settle())
+        requestAnimationFrame(fn)
+      }
+    }
+
+    fn()
+
+    return {
+      stop: () => {
+        stop = true
+      }
+    }
   }
 }
 

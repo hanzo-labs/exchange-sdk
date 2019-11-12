@@ -9,11 +9,11 @@ export enum OrderSide {
   /**
    * ask order
    */
-  ASK,
+  ASK = 'ask',
   /**
    * bid order
    */
-  BID,
+  BID = 'bid',
 }
 
 /**
@@ -23,11 +23,11 @@ export enum OrderType {
   /**
    * limit order
    */
-  LIMIT,
+  LIMIT = 'limit',
   /**
    * market order
    */
-  MARKET,
+  MARKET = 'market',
 }
 
 /**
@@ -37,35 +37,35 @@ export enum OrderStatus {
   /**
    * unfilled order (default state)
    */
-  UNFILLED,
+  UNFILLED = 'unfilled',
   /**
    * unfilled left over order from a partial fill
    */
-  REMAINDER,
+  REMAINDER = 'remainder',
   /**
    * partially filled order
    */
-  PARTIALLY_FILLED,
+  PARTIALLY_FILLED = 'partially-filled',
   /**
    * fully filled order
    */
-  FILLED,
+  FILLED = 'filled',
   /**
    * partially filled but cancelled order
    */
-  PARTIALLY_FILLED_CANCELLED,
+  PARTIALLY_FILLED_CANCELLED = 'partially-filled-cancelled',
   /**
    * cancelled order
    */
-  CANCELLED,
+  CANCELLED = 'cancelled',
   /**
    * partially filled but remainder rejected
    */
-  PARTIALLY_FILLED_REMAINDER_REJECTED,
+  PARTIALLY_FILLED_REMAINDER_REJECTED = 'partially-filled-remainder-rejected',
   /**
    * remainder rejected
    */
-  REMAINDER_REJECTED,
+  REMAINDER_REJECTED = 'remainder-rejected',
 }
 
 /**
@@ -124,7 +124,7 @@ export default class Order {
    * @param price price of this order
    * @param quantity quantity involved in this order
    */
-  constructor(externalId: string, side: OrderSide, type: OrderType, quantity: number | string | Decimal = 0, price: number | string | Decimal = 0, fillQuantity: number | string | Decimal = 0, createdAt: number = time().unix()) {
+  constructor(externalId: string, side: OrderSide, type: OrderType, quantity: number | string | Decimal = 0, price: number | string | Decimal = 0, fillQuantity: number | string | Decimal = 0, createdAt: number = time().valueOf()) {
     this.externalId = externalId
     this.side = side
     this.type = type

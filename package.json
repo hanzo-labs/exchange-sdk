@@ -1,5 +1,5 @@
 {
-  "name": "matching-engine",
+  "name": "@hanzo/matching-engine",
   "version": "1.0.1",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidtai/matching-engine"
+    "url": "https://github.com/hanzoai/matching-engine"
   },
   "devDependencies": {
     "@babel/core": "7.6.2",
@@ -34,6 +34,7 @@
     "rollup-plugin-visualizer": "2.7.2",
     "serve": "11.2.0",
     "source-map-explorer": "2.1.0",
+    "source-map-support": "0.5.16",
     "ts-jest": "24.1.0",
     "typedoc": "github:TypeStrong/typedoc#5704bf5",
     "typedoc-plugin-markdown": "2.2.11",
@@ -42,17 +43,19 @@
   "scripts": {
     "audit": "node_modules/.bin/source-map-explorer dist/index.js",
     "prepare": "npm run build",
-    "clean": "rm -rf dist",
+    "clean:js": "rm -rf dist",
     "clean:docs": "rm -rf docs",
-    "build": "npm run clean && node_modules/.bin/rollup -c && npm run build:types && npm run build:docs",
-    "build:docs": "npm run clean:docs && node_modules/.bin/typedoc --out docs src",
+    "build": "npm run clean:js && npm run build:js && npm run build:types && npm run build:docs",
+    "build:js": "npm run clean:js && node_modules/.bin/rollup -c",
+    "build:docs": "npm run clean:docs && node_modules/.bin/typedoc --out docs --exclude '**/*+(test).ts' src",
     "build:types": "tsc --emitDeclarationOnly",
     "build:watch": "node_modules/.bin/rollup -c -w",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "watch": "node_modules/.bin/concurrently 'npm run build:watch' 'node_modules/.bin/nodemon ./server.js --watch ./dist --ignore ./dist/index.esm.js --ignore ./dist/index.umd.js' 'node_modules/.bin/serve -l tcp://127.0.0.1'",
+    "watch": "node_modules/.bin/concurrently 'npm run build:watch' 'node_modules/.bin/nodemon 'node_modules/.bin/ts-node server.ts' --watch ./dist --ignore ./dist/index.esm.js --ignore ./dist/index.umd.js' 'node_modules/.bin/serve -l tcp://127.0.0.1'",
     "test": "node_modules/.bin/jest",
-    "test:coverage": "node_modules/.bin/jest --collect-coverage"
+    "test:coverage": "node_modules/.bin/jest --collect-coverage",
+    "serve": "npm run build:js && node -r source-map-support/register ./server.js"
   },
   "renovate": {
     "extends": [
@@ -78,12 +81,24 @@
   "dependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "7.4.4",
     "@babel/plugin-proposal-optional-chaining": "7.6.0",
+    "@types/express": "4.17.2",
     "@types/moment-timezone": "0.5.12",
+    "@types/node": "12.12.7",
+    "@types/raf": "3.4.0",
+    "@types/random": "2.1.0",
+    "@types/socket.io": "2.1.4",
     "@types/uuid": "3.4.6",
+    "avl": "1.4.4",
+    "body-parser": "1.19.0",
     "decimal.js": "10.2.0",
+    "express": "4.17.1",
+    "http": "0.0.0",
     "mnemonist": "0.30.0",
     "moment": "2.24.0",
     "moment-timezone": "0.5.27",
+    "raf": "3.4.1",
+    "random": "2.1.1",
+    "socket.io": "2.3.0",
     "uuid": "3.3.3"
   }
 }

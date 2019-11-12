@@ -72,6 +72,7 @@ const plugins = [
 ]
 
 export default [
+  // source
   {
     input: 'src/index.ts',
     external: [],
@@ -82,4 +83,12 @@ export default [
       { file: pkg.module, format: 'es', sourcemap: true },
     ],
   },
+  {
+    input: 'src/server.ts',
+    external: [],
+    plugins,
+    output: [
+      { name: 'server', file: 'server.js', format: 'cjs', sourcemap: 'inline' },
+    ],
+  }
 ]

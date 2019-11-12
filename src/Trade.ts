@@ -1,6 +1,7 @@
 import uuid from 'uuid'
-import time from './utils/time'
 import Decimal from 'decimal.js'
+
+import time from './utils/time'
 import Order from './Order'
 
 export default class Trade {
@@ -54,10 +55,10 @@ export default class Trade {
   constructor(
     fillQuantity: Decimal,
     fillPrice: Decimal,
-    newOrders: Order[],
-    matchedOrders: Order[],
-    rejectedOrders: Order[],
-    executedAt: number = time().unix()
+    newOrders: Order[] = [],
+    matchedOrders: Order[] = [],
+    rejectedOrders: Order[] = [],
+    executedAt: number = time().valueOf()
   ) {
     this.fillPrice = fillPrice
     this.fillQuantity = fillQuantity
