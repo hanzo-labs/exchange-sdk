@@ -88,7 +88,7 @@ export default [
     external: [],
     plugins,
     output: [
-      { name: 'server', file: 'server.js', format: 'cjs', sourcemap: 'inline' },
+      { name: 'server', file: 'server.js', format: 'umd', sourcemap: 'inline' },
     ],
   }
 ]

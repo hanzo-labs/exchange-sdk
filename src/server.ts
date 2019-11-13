@@ -1,9 +1,9 @@
-import http from 'http'
 import random from 'random'
 
 import createHttp from './servers/http'
 import Book from './Book'
 import Candle, { CandleInterval, CandleAVL } from './Candle'
+import createSocketIO from './servers/socketio'
 import Order, { OrderSide, OrderType} from './Order'
 import time from './utils/time'
 
@@ -78,12 +78,14 @@ const ctx = testBook.start((tb, trades) => {
     return
   }
 
-  console.log(trades.length, 'trades')
+  // console.log(trades.length, 'trades')
   c1m.tradesToCandles(trades)
   c1h.tradesToCandles(trades)
   c1d.tradesToCandles(trades)
 })
 
 const port = 4000
-http.createServer(app).listen(port)
+// http.createServer(app).listen(port)
+const http = createSocketIO(books, candleTrees, app)
+http.listen(port)
 console.log('listening on port', port)
