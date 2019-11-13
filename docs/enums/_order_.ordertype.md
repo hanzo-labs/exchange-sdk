@@ -17,7 +17,7 @@ type of the order
 
 • **LIMIT**: = "limit"
 
-*Defined in [Order.ts:26](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Order.ts#L26)*
+*Defined in [Order.ts:26](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Order.ts#L26)*
 
 limit order
 
@@ -27,6 +27,6 @@ ___
 
 • **MARKET**: = "market"
 
-*Defined in [Order.ts:30](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Order.ts#L30)*
+*Defined in [Order.ts:30](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Order.ts#L30)*
 
 market order

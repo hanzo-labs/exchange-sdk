@@ -42,7 +42,7 @@ candle data
 
 \+ **new Candle**(`interval`: [CandleInterval](../enums/_candle_.candleinterval.md), `t`: [Trade](_trade_.trade.md)): *[Candle](_candle_.candle.md)*
 
-*Defined in [Candle.ts:139](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L139)*
+*Defined in [Candle.ts:139](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L139)*
 
 **Parameters:**
 
@@ -59,7 +59,7 @@ Name | Type | Description |
 
 • **_closeTime**: *[Time](../modules/_utils_time_.md#time)*
 
-*Defined in [Candle.ts:99](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L99)*
+*Defined in [Candle.ts:99](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L99)*
 
 cached closetime in moment format
 
@@ -69,7 +69,7 @@ ___
 
 • **_openTime**: *[Time](../modules/_utils_time_.md#time)*
 
-*Defined in [Candle.ts:94](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L94)*
+*Defined in [Candle.ts:94](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L94)*
 
 cached opentime in moment format
 
@@ -79,7 +79,7 @@ ___
 
 • **close**: *Decimal*
 
-*Defined in [Candle.ts:124](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L124)*
+*Defined in [Candle.ts:124](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L124)*
 
 close number
 
@@ -89,7 +89,7 @@ ___
 
 • **closeTime**: *number*
 
-*Defined in [Candle.ts:89](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L89)*
+*Defined in [Candle.ts:89](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L89)*
 
 candle close time
 
@@ -99,7 +99,7 @@ ___
 
 • **high**: *Decimal*
 
-*Defined in [Candle.ts:114](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L114)*
+*Defined in [Candle.ts:114](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L114)*
 
 high number
 
@@ -109,7 +109,7 @@ ___
 
 • **interval**: *[CandleInterval](../enums/_candle_.candleinterval.md)*
 
-*Defined in [Candle.ts:104](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L104)*
+*Defined in [Candle.ts:104](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L104)*
 
 candle interval
 
@@ -119,7 +119,7 @@ ___
 
 • **low**: *Decimal*
 
-*Defined in [Candle.ts:119](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L119)*
+*Defined in [Candle.ts:119](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L119)*
 
 low number
 
@@ -129,7 +129,7 @@ ___
 
 • **open**: *Decimal*
 
-*Defined in [Candle.ts:109](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L109)*
+*Defined in [Candle.ts:109](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L109)*
 
 open number
 
@@ -139,7 +139,7 @@ ___
 
 • **openTime**: *number*
 
-*Defined in [Candle.ts:84](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L84)*
+*Defined in [Candle.ts:84](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L84)*
 
 candle open time
 
@@ -149,7 +149,7 @@ ___
 
 • **quoteAssetVolume**: *Decimal*
 
-*Defined in [Candle.ts:134](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L134)*
+*Defined in [Candle.ts:134](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L134)*
 
 quantity
 
@@ -159,7 +159,7 @@ ___
 
 • **trades**: *number*
 
-*Defined in [Candle.ts:139](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L139)*
+*Defined in [Candle.ts:139](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L139)*
 
 number of trades
 
@@ -169,7 +169,7 @@ ___
 
 • **volume**: *Decimal*
 
-*Defined in [Candle.ts:129](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L129)*
+*Defined in [Candle.ts:129](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L129)*
 
 volume in terms of price * quantity
 
@@ -179,7 +179,7 @@ volume in terms of price * quantity
 
 ▸ **addTrade**(`t`: [Trade](_trade_.trade.md)): *this*
 
-*Defined in [Candle.ts:193](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L193)*
+*Defined in [Candle.ts:193](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L193)*
 
 add trade to the candle if it is in the correct timeframe
 
@@ -199,7 +199,7 @@ ___
 
 ▸ **addTradeData**(`quantity`: Decimal, `price`: Decimal): *this*
 
-*Defined in [Candle.ts:171](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L171)*
+*Defined in [Candle.ts:171](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L171)*
 
 add just the import trade params to the candle (skips the date check)
 
@@ -220,7 +220,7 @@ ___
 
 ▸ **export**(): *any[]*
 
-*Defined in [Candle.ts:228](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L228)*
+*Defined in [Candle.ts:228](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L228)*
 
 returns exported format based on binance api
 
@@ -245,7 +245,7 @@ ___
 
 ▸ **hasTime**(`t`: [Time](../modules/_utils_time_.md#time) | string | number): *boolean*
 
-*Defined in [Candle.ts:206](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Candle.ts#L206)*
+*Defined in [Candle.ts:206](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Candle.ts#L206)*
 
 Does the candle interval include this time?
 

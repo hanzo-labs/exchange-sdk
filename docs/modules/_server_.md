@@ -14,6 +14,7 @@
 * [candleTrees](_server_.md#const-candletrees)
 * [ctx](_server_.md#const-ctx)
 * [exp](_server_.md#const-exp)
+* [http](_server_.md#const-http)
 * [nrm](_server_.md#const-nrm)
 * [port](_server_.md#const-port)
 * [t](_server_.md#let-t)
@@ -25,7 +26,7 @@
 
 • **app**: *Express‹›* =  createHttp(books, candleTrees)
 
-*Defined in [server.ts:63](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L63)*
+*Defined in [server.ts:63](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L63)*
 
 ___
 
@@ -35,7 +36,7 @@ ___
   ['test', testBook],
 ])
 
-*Defined in [server.ts:49](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L49)*
+*Defined in [server.ts:49](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L49)*
 
 ___
 
@@ -43,7 +44,7 @@ ___
 
 • **c1d**: *[CandleAVL](../classes/_candle_.candleavl.md)‹›* =  new CandleAVL(CandleInterval.ONE_DAY)
 
-*Defined in [server.ts:16](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L16)*
+*Defined in [server.ts:16](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L16)*
 
 ___
 
@@ -51,7 +52,7 @@ ___
 
 • **c1h**: *[CandleAVL](../classes/_candle_.candleavl.md)‹›* =  new CandleAVL(CandleInterval.ONE_HOUR)
 
-*Defined in [server.ts:15](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L15)*
+*Defined in [server.ts:15](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L15)*
 
 ___
 
@@ -59,7 +60,7 @@ ___
 
 • **c1m**: *[CandleAVL](../classes/_candle_.candleavl.md)‹›* =  new CandleAVL(CandleInterval.ONE_MINUTE)
 
-*Defined in [server.ts:14](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L14)*
+*Defined in [server.ts:14](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L14)*
 
 ___
 
@@ -75,7 +76,7 @@ ___
   ],
 ])
 
-*Defined in [server.ts:53](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L53)*
+*Defined in [server.ts:53](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L53)*
 
 ___
 
@@ -97,13 +98,13 @@ ___
     return
   }
 
-  console.log(trades.length, 'trades')
+  // console.log(trades.length, 'trades')
   c1m.tradesToCandles(trades)
   c1h.tradesToCandles(trades)
   c1d.tradesToCandles(trades)
 })
 
-*Defined in [server.ts:65](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L65)*
+*Defined in [server.ts:65](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L65)*
 
 ___
 
@@ -111,7 +112,7 @@ ___
 
 • **exp**: *function* =  random.exponential(1)
 
-*Defined in [server.ts:10](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L10)*
+*Defined in [server.ts:10](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L10)*
 
 #### Type declaration:
 
@@ -119,11 +120,19 @@ ___
 
 ___
 
+### `Const` http
+
+• **http**: *any* =  createSocketIO(books, candleTrees, app)
+
+*Defined in [server.ts:89](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L89)*
+
+___
+
 ### `Const` nrm
 
 • **nrm**: *function* =  random.normal(1, 1)
 
-*Defined in [server.ts:11](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L11)*
+*Defined in [server.ts:11](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L11)*
 
 #### Type declaration:
 
@@ -135,7 +144,7 @@ ___
 
 • **port**: *4000* = 4000
 
-*Defined in [server.ts:87](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L87)*
+*Defined in [server.ts:87](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L87)*
 
 ___
 
@@ -143,7 +152,7 @@ ___
 
 • **t**: *number* =  time().valueOf() - (1000 * 10001)
 
-*Defined in [server.ts:18](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L18)*
+*Defined in [server.ts:18](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L18)*
 
 ___
 
@@ -151,4 +160,4 @@ ___
 
 • **testBook**: *[Book](../classes/_book_.book.md)‹›* =  new Book('test')
 
-*Defined in [server.ts:13](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/server.ts#L13)*
+*Defined in [server.ts:13](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/server.ts#L13)*

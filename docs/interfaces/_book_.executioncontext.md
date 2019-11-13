@@ -20,7 +20,7 @@ Object representing continuing execution
 
 • **stop**: *function*
 
-*Defined in [Book.ts:75](https://github.com/hanzoai/matching-engine/blob/1c5df06/src/Book.ts#L75)*
+*Defined in [Book.ts:75](https://github.com/hanzoai/matching-engine/blob/4cb71c3/src/Book.ts#L75)*
 
 #### Type declaration:
 

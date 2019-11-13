@@ -1,5 +1,5 @@
 import { Server } from 'http'
-import SocketIO, { Socket } from 'socket.io'
+import SocketIO from 'socket.io-client'
 
 import time from '../utils/time'
 import Book  from '../Book'
@@ -35,13 +35,13 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
   //   return oldAddOrder(o)
   // }
 
-  io.on('connection', (socket) => {
+  io.on('connection', (socket: any) => {
     console.log('user connected')
     // On connection we should check to see if the user has previous historical data
     // If they have client side data already we need to figure out any gaps they're missing and fill them
     // If they don't have client data we need to send them the historical payload
 
-    socket.on('book.subscribe', room => {
+    socket.on('book.subscribe', (room: any) => {
       const { name } = room
 
       try {
@@ -61,7 +61,7 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
       }
     })
 
-    socket.on('book.unsubscribe', room => {
+    socket.on('book.unsubscribe', (room: any) => {
       const { name } = room
 
       try {
@@ -76,7 +76,7 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
       }
     })
 
-    socket.on('order.create', (order) => {
+    socket.on('order.create', (order: any) => {
       const {
         externalId,
         side,
@@ -105,7 +105,7 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
 
     // We should change this to be an interval that broadcasts every 10 seconds or so
     // That way the client knows to append the data
-    socket.on('candles.get', (opts) => {
+    socket.on('candles.get', (opts: any) => {
       let {
         endTime,
         startTime,
@@ -121,13 +121,13 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
           throw new Error(`No candles found for ${name}`)
         }
 
-        
+
         endTime = startTime || time().valueOf()
         // interval = interval || CandleInterval.Hour
         limit = Math.min(1000, limit)
 
         // TODO Add limit and time
-        
+
         const ct = cts.get(intervalCodes.get(interval) as CandleInterval)
         if (!ct) {
           throw new Error(`Candle interval ${interval} for ${name} not found`)
