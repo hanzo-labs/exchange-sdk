@@ -102,7 +102,9 @@
     "moment-timezone": "0.5.27",
     "raf": "3.4.1",
     "random": "2.1.1",
-    "socket.io": "2.3.0",
     "uuid": "3.3.3"
+  },
+  "peerDependencies": {
+    "socket.io": "2.3.0"
   }
 }
