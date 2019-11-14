@@ -53,7 +53,7 @@ order book for keeping track of and settling orders
 
 \+ **new Book**(`name`: string): *[Book](_book_.book.md)*
 
-*Defined in [Book.ts:129](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L129)*
+*Defined in [Book.ts:129](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L129)*
 
 order constructor
 
@@ -71,7 +71,7 @@ Name | Type | Description |
 
 • **_meanPrice**: *Decimal* =  new Decimal(0)
 
-*Defined in [Book.ts:119](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L119)*
+*Defined in [Book.ts:119](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L119)*
 
 cached mean price, can only safely be taken after a settle
 
@@ -81,7 +81,7 @@ ___
 
 • **_orderBook**: *[OrderBookTree](../modules/_book_.md#orderbooktree)* =  new AVLTree<string, Decimal>(naturalOrderCollator.compare)
 
-*Defined in [Book.ts:106](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L106)*
+*Defined in [Book.ts:106](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L106)*
 
 this keeps track of the current orderbook as a map of prices to volumes
 
@@ -91,7 +91,7 @@ ___
 
 • **activeOrders**: *[OrderMap](../modules/_book_.md#ordermap)* =  new Map<string, Order>()
 
-*Defined in [Book.ts:129](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L129)*
+*Defined in [Book.ts:129](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L129)*
 
 this keeps track of all the orders so updating status and cancellation is
 easier
@@ -102,7 +102,7 @@ ___
 
 • **asks**: *[OrderHeap](../modules/_book_.md#orderheap)* =  new FibonacciHeap<Order>(askComparator)
 
-*Defined in [Book.ts:96](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L96)*
+*Defined in [Book.ts:96](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L96)*
 
 ask heap
 
@@ -112,7 +112,7 @@ ___
 
 • **bids**: *[OrderHeap](../modules/_book_.md#orderheap)* =  new FibonacciHeap<Order>(bidComparator)
 
-*Defined in [Book.ts:101](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L101)*
+*Defined in [Book.ts:101](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L101)*
 
 bid heap
 
@@ -122,7 +122,7 @@ ___
 
 • **id**: *string* =  uuid.v4()
 
-*Defined in [Book.ts:85](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L85)*
+*Defined in [Book.ts:85](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L85)*
 
 unique book id
 
@@ -132,7 +132,7 @@ ___
 
 • **name**: *string*
 
-*Defined in [Book.ts:91](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L91)*
+*Defined in [Book.ts:91](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L91)*
 
 string identifier for book (generally something simple like the trading
 pair)
@@ -143,7 +143,7 @@ ___
 
 • **pendingOrderBook**: *[OrderBookMap](../modules/_book_.md#orderbookmap)* =  new Map<string, Decimal>()
 
-*Defined in [Book.ts:123](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L123)*
+*Defined in [Book.ts:123](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L123)*
 
 this is a list of pending orders that is merged into the existing orderbook on settle
 
@@ -153,7 +153,7 @@ this is a list of pending orders that is merged into the existing orderbook on s
 
 • **get askSize**(): *number*
 
-*Defined in [Book.ts:144](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L144)*
+*Defined in [Book.ts:144](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L144)*
 
 get the number of asks, note cancelled but unsettled orders are only
 periodically removed
@@ -168,7 +168,7 @@ ___
 
 • **get bidSize**(): *number*
 
-*Defined in [Book.ts:153](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L153)*
+*Defined in [Book.ts:153](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L153)*
 
 get the number of bids, note cancelled but unsettled orders are only
 periodically removed
@@ -183,7 +183,7 @@ ___
 
 • **get meanPrice**(): *Decimal*
 
-*Defined in [Book.ts:293](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L293)*
+*Defined in [Book.ts:293](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L293)*
 
 **Returns:** *Decimal*
 
@@ -193,7 +193,7 @@ ___
 
 • **get orderBook**(): *[OrderBook](../interfaces/_book_.orderbook.md)*
 
-*Defined in [Book.ts:198](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L198)*
+*Defined in [Book.ts:198](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L198)*
 
 **Returns:** *[OrderBook](../interfaces/_book_.orderbook.md)*
 
@@ -205,7 +205,7 @@ ___
 
 • **get spread**(): *Decimal*
 
-*Defined in [Book.ts:289](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L289)*
+*Defined in [Book.ts:289](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L289)*
 
 **Returns:** *Decimal*
 
@@ -218,7 +218,7 @@ limit orders
 
 ▸ **addOrder**(`order`: [Order](_order_.order.md)): *boolean*
 
-*Defined in [Book.ts:220](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L220)*
+*Defined in [Book.ts:220](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L220)*
 
 Insert an order into the order book
 
@@ -236,7 +236,7 @@ ___
 
 ▸ **addToPendingOrderBook**(`price`: Decimal, `quantity`: Decimal): *void*
 
-*Defined in [Book.ts:207](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L207)*
+*Defined in [Book.ts:207](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L207)*
 
 modify the pending order book, skip 0s
 
@@ -255,7 +255,7 @@ ___
 
 ▸ **cancelOrder**(`order`: [Order](_order_.order.md)): *boolean*
 
-*Defined in [Book.ts:272](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L272)*
+*Defined in [Book.ts:272](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L272)*
 
 cancel an order if it exists
 
@@ -273,7 +273,7 @@ ___
 
 ▸ **nearestAsk**(): *[Order](_order_.order.md) | undefined*
 
-*Defined in [Book.ts:160](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L160)*
+*Defined in [Book.ts:160](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L160)*
 
 **Returns:** *[Order](_order_.order.md) | undefined*
 
@@ -285,7 +285,7 @@ ___
 
 ▸ **nearestBid**(): *[Order](_order_.order.md) | undefined*
 
-*Defined in [Book.ts:179](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L179)*
+*Defined in [Book.ts:179](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L179)*
 
 **Returns:** *[Order](_order_.order.md) | undefined*
 
@@ -297,7 +297,7 @@ ___
 
 ▸ **settle**(): *[Trade](_trade_.trade.md)[]*
 
-*Defined in [Book.ts:300](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L300)*
+*Defined in [Book.ts:300](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L300)*
 
 settle the order book by executing overlapping trades
 
@@ -309,7 +309,7 @@ ___
 
 ▸ **start**(`settleFn`: function): *[ExecutionContext](../interfaces/_book_.executioncontext.md)*
 
-*Defined in [Book.ts:493](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L493)*
+*Defined in [Book.ts:493](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L493)*
 
 start executing settle repeatedly, only run once
 
@@ -338,7 +338,7 @@ return an ExecutionContext with a stop function
 
 ### ▪ **_renderedOrderBook**: *object*
 
-*Defined in [Book.ts:111](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L111)*
+*Defined in [Book.ts:111](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L111)*
 
 this keeps track of the rendered orderbook
 
@@ -346,10 +346,10 @@ this keeps track of the rendered orderbook
 
 • **asks**: *never[]* =  []
 
-*Defined in [Book.ts:113](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L113)*
+*Defined in [Book.ts:113](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L113)*
 
 ###  bids
 
 • **bids**: *never[]* =  []
 
-*Defined in [Book.ts:112](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Book.ts#L112)*
+*Defined in [Book.ts:112](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L112)*
