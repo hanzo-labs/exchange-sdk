@@ -1,10 +1,11 @@
 import SocketIO from 'socket.io'
+
 import time from '../utils/time'
 import Book  from '../Book'
 import Order from '../Order'
 import { CandleAVL, CandleInterval } from '../Candle'
 
-export default function createSocketIO (books: Map<string, Book>, candleTrees: Map<string, Map<CandleInterval, CandleAVL>>, app: any) {
+export default function createSocketIO (books: Map<string, Book>, candleTrees: Map<string, Map<CandleInterval, CandleAVL>>, app: any, createBook: any) {
   const http: any = require('http').createServer(app)
   const io: SocketIO.Server = SocketIO(http, { pingTimeout: 200000, pingInterval: 300000 })
 
@@ -14,7 +15,15 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
     ['1d', CandleInterval.ONE_DAY],
   ])
 
+  const getEmitData = (book: Book) => {
+    if (!book) return {}
 
+    const meanPrice = book.meanPrice
+    const spread = book.spread
+    const orderBook = book.orderBook
+
+    return { meanPrice, spread, orderBook }
+  }
 
   io.on('connection', (socket: SocketIO.Socket) => {
     console.log('user connected')
@@ -22,18 +31,39 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
     // If they have client side data already we need to figure out any gaps they're missing and fill them
     // If they don't have client data we need to send them the historical payload
 
+    // Setup broadcast interval
+    let broadcastInterval = setInterval(() => {
+      // Iterate through each book and broadcast to each room
+      // console.log('Sending out the order books!')
+      console.log('Found socket rooms', socket.rooms)
+      const rooms = Object.keys(socket.rooms)
+      if (rooms) {
+        rooms.forEach(r => {
+          const book = books.get(r)
+          if (book) {
+            console.log(`Broadcasting to ${r}`)
+            io.to(r).emit('book.data', getEmitData(book))
+          }
+        })
+      }
+    }, 15 * 1000)
+
     socket.on('book.subscribe', (room: any) => {
       const { name } = room
 
       try {
-        const book = books.get(name)
+        let book = books.get(name)
         if (!book) {
-          throw new Error(`No book found for ${name}`)
+          // Make the book
+          book = createBook(name)
+          if (!book) {
+            throw new Error('Double check for book, these are dumb')
+          }
         }
 
         socket.join(name)
-
-        socket.emit('book.subscribe.success', { success: true, book: name })
+        const emitData = getEmitData(book)
+        socket.emit('book.subscribe.success', { success: true, ...emitData })
       } catch (e) {
 
         socket.emit('book.subscribe.error', {
@@ -75,7 +105,7 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
         const o = new Order(externalId, side, type, quantity, price)
         book.addOrder(o)
 
-        socket.emit('order.create.success', o)
+        socket.to(name).emit('order.create.success', o)
       } catch (e) {
 
         socket.emit('order.create.error', {
@@ -124,22 +154,9 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
 
     socket.on('disconnect', () => {
       console.log('user disconnected')
+      clearInterval(broadcastInterval)
     })
 
-    // Setup broadcast interval
-    setInterval(() => {
-      // Iterate through each book and broadcast to each room
-      // console.log('Sending out the order books!')
-      console.log('Found socket rooms', socket.rooms)
-      const room = socket.rooms[0]
-      if (room) {
-        console.log(`Broadcasting to ${name}`)
-        const book = books.get(room)
-        if (book) {
-          socket.to(room).emit('book.data', book.orderBook)
-        }
-      }
-    }, 15 * 1000)
   })
 
   return http
