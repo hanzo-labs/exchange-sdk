@@ -1,13 +1,22 @@
 import SocketIO from 'socket.io'
 
 import time from '../utils/time'
-import Book  from '../Book'
+import Book from '../Book'
 import Order from '../Order'
 import { CandleAVL, CandleInterval } from '../Candle'
 
-export default function createSocketIO (books: Map<string, Book>, candleTrees: Map<string, Map<CandleInterval, CandleAVL>>, app: any, createBook: any) {
+export default function createSocketIO(
+  books: Map<string, Book>,
+  candleTrees: Map<string, Map<CandleInterval, CandleAVL>>,
+  app: any,
+  createBook: any,
+) {
   const http: any = require('http').createServer(app)
-  const io: SocketIO.Server = SocketIO(http, { pingTimeout: 200000, pingInterval: 300000, origins: '*:*' })
+  const io: SocketIO.Server = SocketIO(http, { 
+    pingTimeout: 200000, 
+    pingInterval: 300000, 
+    origins: '*:*',
+  })
 
   const intervalCodes = new Map<string, CandleInterval>([
     ['1m', CandleInterval.ONE_MINUTE],
@@ -63,9 +72,11 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
 
         socket.join(name)
         const emitData = getEmitData(book)
-        socket.emit('book.subscribe.success', { success: true, ...emitData })
+        socket.emit('book.subscribe.success', {
+          success: true,
+          ...emitData,
+        })
       } catch (e) {
-
         socket.emit('book.subscribe.error', {
           error: e.message,
         })
@@ -80,7 +91,6 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
 
         socket.emit('book.unsubscribe.success', { success: true })
       } catch (e) {
-
         socket.emit('book.unsubscribe.error', {
           error: e.message,
         })
@@ -88,14 +98,7 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
     })
 
     socket.on('order.create', (order: any) => {
-      const {
-        externalId,
-        side,
-        type,
-        quantity,
-        price,
-        name
-      } = order
+      const { externalId, side, type, quantity, price, name } = order
 
       try {
         const book = books.get(name)
@@ -105,9 +108,8 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
         const o = new Order(externalId, side, type, quantity, price)
         book.addOrder(o)
 
-        socket.to(name).emit('order.create.success', o)
+        io.to(name).emit('order.create.success', getEmitData(book))
       } catch (e) {
-
         socket.emit('order.create.error', {
           error: e.message,
         })
@@ -132,18 +134,21 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
           throw new Error(`No candles found for ${name}`)
         }
 
-
         endTime = startTime || time().valueOf()
         // interval = interval || CandleInterval.Hour
         limit = Math.min(1000, limit)
 
         // TODO Add limit and time
 
-        const ct = cts.get(intervalCodes.get(interval) as CandleInterval)
+        const ct = cts.get(
+          intervalCodes.get(interval) as CandleInterval,
+        )
         if (!ct) {
-          throw new Error(`Candle interval ${interval} for ${name} not found`)
+          throw new Error(
+            `Candle interval ${interval} for ${name} not found`,
+          )
         }
-        const candles = ct.values().map((x) => x.export())
+        const candles = ct.values().map(x => x.export())
         socket.emit('candles.get.success', candles)
       } catch (e) {
         socket.emit('candles.get.error', {
@@ -156,7 +161,6 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
       console.log('user disconnected')
       clearInterval(broadcastInterval)
     })
-
   })
 
   return http
