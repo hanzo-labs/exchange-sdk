@@ -83,12 +83,4 @@ export default [
       { file: pkg.module, format: 'es', sourcemap: true },
     ],
   },
-  {
-    input: 'src/server.ts',
-    external: [],
-    plugins,
-    output: [
-      { name: 'server', file: 'server.js', format: 'umd', sourcemap: 'inline' },
-    ],
-  }
 ]

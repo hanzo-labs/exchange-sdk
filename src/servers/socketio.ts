@@ -1,5 +1,4 @@
-import * as SocketIO from 'socket.io'
-
+import SocketIO from 'socket.io'
 import time from '../utils/time'
 import Book  from '../Book'
 import Order from '../Order'
