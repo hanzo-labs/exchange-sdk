@@ -57,7 +57,7 @@ a map collection for candles with the same intervals
 
 *Overrides void*
 
-*Defined in [Candle.ts:21](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Candle.ts#L21)*
+*Defined in [Candle.ts:21](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Candle.ts#L21)*
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ Name | Type | Description |
 
 • **interval**: *[CandleInterval](../enums/_candle_.candleinterval.md)*
 
-*Defined in [Candle.ts:20](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Candle.ts#L20)*
+*Defined in [Candle.ts:20](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Candle.ts#L20)*
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:15
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:15
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 • **timeFrame**: *string*
 
-*Defined in [Candle.ts:21](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Candle.ts#L21)*
+*Defined in [Candle.ts:21](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Candle.ts#L21)*
 
 ## Methods
 
@@ -101,7 +101,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:19
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:19
 
 **Parameters:**
 
@@ -119,7 +119,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:37
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:37
 
 **Returns:** *AVLTree‹number, [Candle](_candle_.candle.md)›*
 
@@ -131,7 +131,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:20
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:20
 
 **Parameters:**
 
@@ -149,7 +149,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:36
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:36
 
 **Returns:** *AVLTree‹number, [Candle](_candle_.candle.md)›*
 
@@ -161,7 +161,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:18
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:18
 
 **Parameters:**
 
@@ -179,7 +179,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:29
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:29
 
 **Parameters:**
 
@@ -197,7 +197,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:16
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:16
 
 **Parameters:**
 
@@ -216,7 +216,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:34
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:34
 
 **Returns:** *boolean*
 
@@ -228,7 +228,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:21
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:21
 
 **Returns:** *boolean*
 
@@ -240,7 +240,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:22
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:22
 
 **Returns:** *Array‹number›*
 
@@ -252,7 +252,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:31
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:31
 
 **Parameters:**
 
@@ -271,7 +271,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:26
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:26
 
 **Returns:** *number*
 
@@ -283,7 +283,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:28
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:28
 
 **Returns:** *Node‹number, [Candle](_candle_.candle.md)›*
 
@@ -295,7 +295,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:25
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:25
 
 **Returns:** *number*
 
@@ -307,7 +307,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:27
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:27
 
 **Returns:** *Node‹number, [Candle](_candle_.candle.md)›*
 
@@ -319,7 +319,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:33
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:33
 
 **Parameters:**
 
@@ -337,7 +337,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:24
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:24
 
 **Returns:** *Node‹number, [Candle](_candle_.candle.md)›*
 
@@ -349,7 +349,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:32
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:32
 
 **Parameters:**
 
@@ -367,7 +367,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:30
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:30
 
 **Parameters:**
 
@@ -388,7 +388,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:17
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:17
 
 **Parameters:**
 
@@ -404,7 +404,7 @@ ___
 
 ▸ **timeSlice**(`startTime`: number, `endTime`: number, `limit`: number): *[Candle](_candle_.candle.md)[]*
 
-*Defined in [Candle.ts:61](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Candle.ts#L61)*
+*Defined in [Candle.ts:61](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Candle.ts#L61)*
 
 returns the candles withing a certain time range
 
@@ -428,7 +428,7 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:35
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:35
 
 **Returns:** *string*
 
@@ -438,7 +438,7 @@ ___
 
 ▸ **tradesToCandles**(`trades`: [Trade](_trade_.trade.md)[]): *[CandleAVL](_candle_.candleavl.md)*
 
-*Defined in [Candle.ts:38](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Candle.ts#L38)*
+*Defined in [Candle.ts:38](https://github.com/hanzoai/matching-engine/blob/976fc6f/src/Candle.ts#L38)*
 
 process trades into candles
 
@@ -460,6 +460,6 @@ ___
 
 *Inherited from void*
 
-Defined in /Users/everettwizr/hanzo/matching-engine/node_modules/avl/src/index.d.ts:23
+Defined in /Users/tylernewman/prod/esx/matching-engine/node_modules/avl/src/index.d.ts:23
 
 **Returns:** *Array‹[Candle](_candle_.candle.md)›*
