@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 
 import Book  from '../Book'
 import Order from '../Order'
@@ -13,6 +14,7 @@ export default function createHttp (books: Map<string, Book>, candleTrees: Map<s
 
   // parse application/json
   app.use(bodyParser.json())
+  app.use(cors())
 
   const newOrder = (req: Request, res: Response) => {
     const { name } = req.params

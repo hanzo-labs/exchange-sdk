@@ -1,5 +1,4 @@
-import { Server } from 'http'
-import SocketIO from 'socket.io-client'
+import * as SocketIO from 'socket.io'
 
 import time from '../utils/time'
 import Book  from '../Book'
@@ -7,8 +6,8 @@ import Order from '../Order'
 import { CandleAVL, CandleInterval } from '../Candle'
 
 export default function createSocketIO (books: Map<string, Book>, candleTrees: Map<string, Map<CandleInterval, CandleAVL>>, app: any) {
-  const http = require('http').Server(app)
-  const io = SocketIO(http)
+  const http: any = require('http').createServer(app)
+  const io: SocketIO.Server = SocketIO(http, { pingTimeout: 200000, pingInterval: 300000 })
 
   const intervalCodes = new Map<string, CandleInterval>([
     ['1m', CandleInterval.ONE_MINUTE],
@@ -16,26 +15,9 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
     ['1d', CandleInterval.ONE_DAY],
   ])
 
-  // const oldSettle = book.settle
 
-  // book.settle = () => {
-  //   const trades = oldSettle()
 
-  //   // Emit Trades
-  //   io.emit('trades.updated',    trades)
-  //   io.emit('orderBook.updated', book.orderBook)
-  //   io.emit('candles.updated',   [])
-
-  //   return trades
-  // }
-
-  // const oldAddOrder = book.addOrder
-
-  // book.addOrder = (o) => {
-  //   return oldAddOrder(o)
-  // }
-
-  io.on('connection', (socket: any) => {
+  io.on('connection', (socket: SocketIO.Socket) => {
     console.log('user connected')
     // On connection we should check to see if the user has previous historical data
     // If they have client side data already we need to figure out any gaps they're missing and fill them
@@ -148,10 +130,16 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
     // Setup broadcast interval
     setInterval(() => {
       // Iterate through each book and broadcast to each room
-      books.forEach(b => {
-        console.log(`Broadcasting ${b.name}`)
-        socket.to(b.name).emit('book.data', b.orderBook)
-      })
+      // console.log('Sending out the order books!')
+      console.log('Found socket rooms', socket.rooms)
+      const room = socket.rooms[0]
+      if (room) {
+        console.log(`Broadcasting to ${name}`)
+        const book = books.get(room)
+        if (book) {
+          socket.to(room).emit('book.data', book.orderBook)
+        }
+      }
     }, 15 * 1000)
   })
 
