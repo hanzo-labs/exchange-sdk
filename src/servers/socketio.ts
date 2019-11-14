@@ -7,7 +7,7 @@ import { CandleAVL, CandleInterval } from '../Candle'
 
 export default function createSocketIO (books: Map<string, Book>, candleTrees: Map<string, Map<CandleInterval, CandleAVL>>, app: any, createBook: any) {
   const http: any = require('http').createServer(app)
-  const io: SocketIO.Server = SocketIO(http, { pingTimeout: 200000, pingInterval: 300000 })
+  const io: SocketIO.Server = SocketIO(http, { pingTimeout: 200000, pingInterval: 300000, origins: '*:*' })
 
   const intervalCodes = new Map<string, CandleInterval>([
     ['1m', CandleInterval.ONE_MINUTE],
@@ -116,7 +116,7 @@ export default function createSocketIO (books: Map<string, Book>, candleTrees: M
 
     // We should change this to be an interval that broadcasts every 10 seconds or so
     // That way the client knows to append the data
-    socket.on('candles.get', (opts: any) => {
+    socket.on('candles.get', (opts: any = {}) => {
       let {
         endTime,
         startTime,
