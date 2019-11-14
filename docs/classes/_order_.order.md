@@ -36,7 +36,7 @@ represents an order that's put in a book
 
 \+ **new Order**(`externalId`: string, `side`: [OrderSide](../enums/_order_.orderside.md), `type`: [OrderType](../enums/_order_.ordertype.md), `quantity`: number | string | Decimal, `price`: number | string | Decimal, `fillQuantity`: number | string | Decimal, `createdAt`: number): *[Order](_order_.order.md)*
 
-*Defined in [Order.ts:118](https://github.com/hanzoai/matching-engine/blob/6b11edf/src/Order.ts#L118)*
+*Defined in [Order.ts:118](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Order.ts#L118)*
 
 order constructor
 
@@ -60,7 +60,7 @@ Name | Type | Default | Description |
 
 • **createdAt**: *number*
 
-*Defined in [Order.ts:118](https://github.com/hanzoai/matching-engine/blob/6b11edf/src/Order.ts#L118)*
+*Defined in [Order.ts:118](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Order.ts#L118)*
 
 unix creation time
 
@@ -70,7 +70,7 @@ ___
 
 • **externalId**: *string*
 
-*Defined in [Order.ts:83](https://github.com/hanzoai/matching-engine/blob/6b11edf/src/Order.ts#L83)*
+*Defined in [Order.ts:83](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Order.ts#L83)*
 
 id from an external system
 
@@ -80,7 +80,7 @@ ___
 
 • **fillQuantity**: *Decimal*
 
-*Defined in [Order.ts:113](https://github.com/hanzoai/matching-engine/blob/6b11edf/src/Order.ts#L113)*
+*Defined in [Order.ts:113](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Order.ts#L113)*
 
 amount filled
 
@@ -90,7 +90,7 @@ ___
 
 • **id**: *string* =  uuid.v4()
 
-*Defined in [Order.ts:78](https://github.com/hanzoai/matching-engine/blob/6b11edf/src/Order.ts#L78)*
+*Defined in [Order.ts:78](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Order.ts#L78)*
 
 unique order id
 
@@ -100,7 +100,7 @@ ___
 
 • **price**: *Decimal*
 
-*Defined in [Order.ts:103](https://github.com/hanzoai/matching-engine/blob/6b11edf/src/Order.ts#L103)*
+*Defined in [Order.ts:103](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Order.ts#L103)*
 
 bid/ask price
 
@@ -110,7 +110,7 @@ ___
 
 • **quantity**: *Decimal*
 
-*Defined in [Order.ts:108](https://github.com/hanzoai/matching-engine/blob/6b11edf/src/Order.ts#L108)*
+*Defined in [Order.ts:108](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Order.ts#L108)*
 
 order size
 
@@ -120,7 +120,7 @@ ___
 
 • **side**: *[OrderSide](../enums/_order_.orderside.md)*
 
-*Defined in [Order.ts:88](https://github.com/hanzoai/matching-engine/blob/6b11edf/src/Order.ts#L88)*
+*Defined in [Order.ts:88](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Order.ts#L88)*
 
 side of the order
 
@@ -130,7 +130,7 @@ ___
 
 • **status**: *[OrderStatus](../enums/_order_.orderstatus.md)* =  OrderStatus.UNFILLED
 
-*Defined in [Order.ts:98](https://github.com/hanzoai/matching-engine/blob/6b11edf/src/Order.ts#L98)*
+*Defined in [Order.ts:98](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Order.ts#L98)*
 
 status of the order
 
@@ -140,7 +140,7 @@ ___
 
 • **type**: *[OrderType](../enums/_order_.ordertype.md)*
 
-*Defined in [Order.ts:93](https://github.com/hanzoai/matching-engine/blob/6b11edf/src/Order.ts#L93)*
+*Defined in [Order.ts:93](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Order.ts#L93)*
 
 type of the order
 
@@ -150,7 +150,7 @@ type of the order
 
 ▸ **clone**(): *[Order](_order_.order.md)*
 
-*Defined in [Order.ts:140](https://github.com/hanzoai/matching-engine/blob/6b11edf/src/Order.ts#L140)*
+*Defined in [Order.ts:140](https://github.com/hanzoai/matching-engine/blob/6e273d4/src/Order.ts#L140)*
 
 **Returns:** *[Order](_order_.order.md)*
 
