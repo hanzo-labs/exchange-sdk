@@ -44,7 +44,7 @@
   },
   "scripts": {
     "audit": "node_modules/.bin/source-map-explorer dist/index.js",
-    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "clean:js": "rm -rf dist",
     "clean:docs": "rm -rf docs",
     "build": "npm run clean:js && npm run build:js && npm run build:types && npm run build:docs",

@@ -28,7 +28,7 @@
 
 \+ **new Trade**(`fillQuantity`: Decimal, `fillPrice`: Decimal, `newOrders`: [Order](_order_.order.md)[], `matchedOrders`: [Order](_order_.order.md)[], `rejectedOrders`: [Order](_order_.order.md)[], `executedAt`: number): *[Trade](_trade_.trade.md)*
 
-*Defined in [Trade.ts:42](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Trade.ts#L42)*
+*Defined in [Trade.ts:42](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Trade.ts#L42)*
 
 trade constructor
 
@@ -51,7 +51,7 @@ Name | Type | Default | Description |
 
 • **executedAt**: *number*
 
-*Defined in [Trade.ts:42](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Trade.ts#L42)*
+*Defined in [Trade.ts:42](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Trade.ts#L42)*
 
 unix time of execution
 
@@ -61,7 +61,7 @@ ___
 
 • **fillPrice**: *Decimal*
 
-*Defined in [Trade.ts:16](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Trade.ts#L16)*
+*Defined in [Trade.ts:16](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Trade.ts#L16)*
 
 fill price
 
@@ -71,7 +71,7 @@ ___
 
 • **fillQuantity**: *Decimal*
 
-*Defined in [Trade.ts:21](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Trade.ts#L21)*
+*Defined in [Trade.ts:21](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Trade.ts#L21)*
 
 fill quantity
 
@@ -81,7 +81,7 @@ ___
 
 • **id**: *string* =  uuid.v4()
 
-*Defined in [Trade.ts:11](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Trade.ts#L11)*
+*Defined in [Trade.ts:11](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Trade.ts#L11)*
 
 unique trade id
 
@@ -91,7 +91,7 @@ ___
 
 • **matchedOrders**: *[Order](_order_.order.md)[]*
 
-*Defined in [Trade.ts:32](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Trade.ts#L32)*
+*Defined in [Trade.ts:32](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Trade.ts#L32)*
 
 bid/ask order pair filled
 
@@ -101,7 +101,7 @@ ___
 
 • **newOrders**: *[Order](_order_.order.md)[]*
 
-*Defined in [Trade.ts:27](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Trade.ts#L27)*
+*Defined in [Trade.ts:27](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Trade.ts#L27)*
 
 orders created by this trade execution (usually partial fill of a market
 order)
@@ -112,6 +112,6 @@ ___
 
 • **rejectedOrders**: *[Order](_order_.order.md)[]*
 
-*Defined in [Trade.ts:37](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Trade.ts#L37)*
+*Defined in [Trade.ts:37](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Trade.ts#L37)*
 
 rejected unfillable orders

@@ -23,7 +23,7 @@ status of the order
 
 • **CANCELLED**: = "cancelled"
 
-*Defined in [Order.ts:60](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Order.ts#L60)*
+*Defined in [Order.ts:60](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Order.ts#L60)*
 
 cancelled order
 
@@ -33,7 +33,7 @@ ___
 
 • **FILLED**: = "filled"
 
-*Defined in [Order.ts:52](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Order.ts#L52)*
+*Defined in [Order.ts:52](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Order.ts#L52)*
 
 fully filled order
 
@@ -43,7 +43,7 @@ ___
 
 • **PARTIALLY_FILLED**: = "partially-filled"
 
-*Defined in [Order.ts:48](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Order.ts#L48)*
+*Defined in [Order.ts:48](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Order.ts#L48)*
 
 partially filled order
 
@@ -53,7 +53,7 @@ ___
 
 • **PARTIALLY_FILLED_CANCELLED**: = "partially-filled-cancelled"
 
-*Defined in [Order.ts:56](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Order.ts#L56)*
+*Defined in [Order.ts:56](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Order.ts#L56)*
 
 partially filled but cancelled order
 
@@ -63,7 +63,7 @@ ___
 
 • **PARTIALLY_FILLED_REMAINDER_REJECTED**: = "partially-filled-remainder-rejected"
 
-*Defined in [Order.ts:64](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Order.ts#L64)*
+*Defined in [Order.ts:64](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Order.ts#L64)*
 
 partially filled but remainder rejected
 
@@ -73,7 +73,7 @@ ___
 
 • **REMAINDER**: = "remainder"
 
-*Defined in [Order.ts:44](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Order.ts#L44)*
+*Defined in [Order.ts:44](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Order.ts#L44)*
 
 unfilled left over order from a partial fill
 
@@ -83,7 +83,7 @@ ___
 
 • **REMAINDER_REJECTED**: = "remainder-rejected"
 
-*Defined in [Order.ts:68](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Order.ts#L68)*
+*Defined in [Order.ts:68](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Order.ts#L68)*
 
 remainder rejected
 
@@ -93,6 +93,6 @@ ___
 
 • **UNFILLED**: = "unfilled"
 
-*Defined in [Order.ts:40](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Order.ts#L40)*
+*Defined in [Order.ts:40](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/Order.ts#L40)*
 
 unfilled order (default state)

@@ -14,7 +14,7 @@
 
 ▸ **createHttp**(`books`: Map‹string, [Book](../classes/_book_.book.md)›, `candleTrees`: Map‹string, Map‹[CandleInterval](../enums/_candle_.candleinterval.md), [CandleAVL](../classes/_candle_.candleavl.md)››): *Express‹›*
 
-*Defined in [servers/http.ts:9](https://github.com/hanzoai/matching-engine/blob/2a88797/src/servers/http.ts#L9)*
+*Defined in [servers/http.ts:9](https://github.com/hanzoai/matching-engine/blob/e02ef88/src/servers/http.ts#L9)*
 
 **Parameters:**
 
