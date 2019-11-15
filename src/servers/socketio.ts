@@ -12,9 +12,9 @@ export default function createSocketIO(
   createBook: any,
 ) {
   const http: any = require('http').createServer(app)
-  const io: SocketIO.Server = SocketIO(http, { 
-    pingTimeout: 200000, 
-    pingInterval: 300000, 
+  const io: SocketIO.Server = SocketIO(http, {
+    pingTimeout: 200000,
+    pingInterval: 300000,
     origins: '*:*',
   })
 
@@ -134,9 +134,9 @@ export default function createSocketIO(
           throw new Error(`No candles found for ${name}`)
         }
 
-        endTime = startTime || time().valueOf()
+        endTime = endTime || time().valueOf()
         // interval = interval || CandleInterval.Hour
-        limit = Math.min(1000, limit)
+        limit = limit || 1000
 
         // TODO Add limit and time
 
@@ -148,7 +148,7 @@ export default function createSocketIO(
             `Candle interval ${interval} for ${name} not found`,
           )
         }
-        const candles = ct.values().map(x => x.export())
+        const candles = ct.timeSlice(startTime, endTime, limit).map((x) => x.export())
         socket.emit('candles.get.success', candles)
       } catch (e) {
         socket.emit('candles.get.error', {

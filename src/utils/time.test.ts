@@ -5,6 +5,6 @@ describe('time', () => {
   test('test', () => {
     let date = moment('2014-06-01T12:00:00Z');
 
-    expect(time(date).format()).toBe('2014-06-01T05:00:00-07:00')
+    expect(time(date).format()).toBe('2014-06-01T08:00:00-04:00')
   })
 })

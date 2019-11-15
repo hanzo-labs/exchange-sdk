@@ -10,12 +10,8 @@ import time from './utils/time'
 const exp = random.exponential(1)
 const nrm = random.normal(1, 1)
 
-const c1m = new CandleAVL(CandleInterval.ONE_MINUTE)
-const c1h = new CandleAVL(CandleInterval.ONE_HOUR)
-const c1d = new CandleAVL(CandleInterval.ONE_DAY)
-
+// Big Data Structures
 const books = new Map<string, Book>()
-
 const candleTrees = new Map<string,Map<CandleInterval, CandleAVL>>()
 
 const createBook = (name: string) => {
@@ -25,15 +21,29 @@ const createBook = (name: string) => {
     return
   }
 
-  
   const newBook = new Book(name)
-  let t = time().valueOf() - (1000 * 10001)
+
+  const c1m = new CandleAVL(CandleInterval.ONE_MINUTE)
+  const c1h = new CandleAVL(CandleInterval.ONE_HOUR)
+  const c1d = new CandleAVL(CandleInterval.ONE_DAY)
+
+  candleTrees.set(
+    name, new Map<CandleInterval, CandleAVL>([
+      [CandleInterval.ONE_MINUTE, c1m],
+      [CandleInterval.ONE_HOUR, c1h],
+      [CandleInterval.ONE_DAY, c1d],
+    ])
+  )
+
+  let t = time().valueOf() - (1000 * 100001)
 
   console.log(`Creating order book with 10000 orders for ${name}`)
 
   // random input
-  for (let i = 0; i < 10000; i++) {
+  for (let i = 0; i < 100000; i++) {
     try {
+      t += 1000
+
       newBook.addOrder(new Order(
         'rnd' + i,
         random.boolean() ? OrderSide.ASK : OrderSide.BID,
@@ -41,7 +51,7 @@ const createBook = (name: string) => {
         Math.round(100 * exp()),
         Math.round(100 * nrm() + 50),
         0,
-        t += 1000,
+        t,
       ))
 
       let trades = newBook.settle()
@@ -49,45 +59,40 @@ const createBook = (name: string) => {
         trade.executedAt = t
       }
 
-      
-
-      books.set(name, newBook)
-      // Set candles
-      candleTrees.set(
-        name, new Map<CandleInterval, CandleAVL>([
-          [CandleInterval.ONE_MINUTE, c1m],
-          [CandleInterval.ONE_HOUR, c1h],
-          [CandleInterval.ONE_DAY, c1d],
-        ])
-      )
-
-      newBook.start((tb, trades) => {
-        try {
-          newBook.addOrder(new Order(
-            'rnd',
-            random.boolean() ? OrderSide.ASK : OrderSide.BID,
-            random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
-            Math.round(10 * exp()),
-            Math.round(10 * nrm() + newBook.meanPrice.toNumber()),
-          ))
-        } catch(e) {
-        }
-      
-        if (trades.length === 0) {
-          return
-        }
-      
-        // console.log(trades.length, 'trades')
-        c1m.tradesToCandles(trades)
-        c1h.tradesToCandles(trades)
-        c1d.tradesToCandles(trades)
-      })
-      console.log(`Finished setting up orderbook - ${name}`)
-      return newBook
+      c1m.tradesToCandles(trades)
+      c1h.tradesToCandles(trades)
+      c1d.tradesToCandles(trades)
     } catch(e) {
-      console.error(`Error creating book for ${name}`, e)
+      //console.error(`Error creating book for ${name}`, e)
     }
   }
+
+  books.set(name, newBook)
+  // Set candles
+  //
+  newBook.start((tb, trades) => {
+    try {
+      newBook.addOrder(new Order(
+        'rnd',
+        random.boolean() ? OrderSide.ASK : OrderSide.BID,
+        random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
+        Math.round(10 * exp()),
+        Math.round(10 * nrm() + newBook.meanPrice.toNumber()),
+      ))
+    } catch(e) {
+    }
+
+    if (trades.length === 0) {
+      return
+    }
+
+    // console.log(trades.length, 'trades')
+    c1m.tradesToCandles(trades)
+    c1h.tradesToCandles(trades)
+    c1d.tradesToCandles(trades)
+  })
+  console.log(`Finished setting up orderbook - ${name}`)
+  return newBook
 }
 
 const app = createHttp(books, candleTrees)

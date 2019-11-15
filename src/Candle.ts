@@ -3,6 +3,7 @@ import AVLTree from 'avl'
 
 import Trade   from './Trade'
 import time, { Time } from './utils/time'
+import memoize from 'fast-memoize'
 
 /**
  * interval for each candle
@@ -28,6 +29,9 @@ export class CandleAVL extends AVLTree<number, Candle> {
 
     this.interval = interval
     this.timeFrame = interval.split(' ')[1]
+
+    const oldTimeSlice = this.timeSlice
+    this.timeSlice = memoize((...args) => oldTimeSlice.apply(this, args))
   }
 
   /**

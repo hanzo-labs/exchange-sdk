@@ -35,7 +35,7 @@
 
 Ƭ **OrderBookMap**: *Map‹string, Decimal›*
 
-*Defined in [Book.ts:59](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L59)*
+*Defined in [Book.ts:59](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Book.ts#L59)*
 
 a map of order price strings to decimals
 
@@ -45,7 +45,7 @@ ___
 
 Ƭ **OrderBookTree**: *AVLTree‹string, Decimal›*
 
-*Defined in [Book.ts:54](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L54)*
+*Defined in [Book.ts:54](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Book.ts#L54)*
 
 a avl tree of order price strings to decimals
 
@@ -55,7 +55,7 @@ ___
 
 Ƭ **OrderHeap**: *FibonacciHeap‹[Order](../classes/_order_.order.md)›*
 
-*Defined in [Book.ts:64](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L64)*
+*Defined in [Book.ts:64](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Book.ts#L64)*
 
 a priorty queue of orders
 
@@ -65,7 +65,7 @@ ___
 
 Ƭ **OrderMap**: *Map‹string, [Order](../classes/_order_.order.md)›*
 
-*Defined in [Book.ts:69](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L69)*
+*Defined in [Book.ts:69](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Book.ts#L69)*
 
 a map of order price strings to decimals
 
@@ -75,7 +75,7 @@ a map of order price strings to decimals
 
 • **naturalOrderCollator**: *Collator* =  new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'})
 
-*Defined in [Book.ts:21](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L21)*
+*Defined in [Book.ts:21](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Book.ts#L21)*
 
 sorts array by natural order of string
 
@@ -85,7 +85,7 @@ sorts array by natural order of string
 
 ▸ **askComparator**(`a`: [Order](../classes/_order_.order.md), `b`: [Order](../classes/_order_.order.md)): *number*
 
-*Defined in [Book.ts:43](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L43)*
+*Defined in [Book.ts:43](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Book.ts#L43)*
 
 min-heap comparator function
 
@@ -106,7 +106,7 @@ ___
 
 ▸ **bidComparator**(`a`: [Order](../classes/_order_.order.md), `b`: [Order](../classes/_order_.order.md)): *number*
 
-*Defined in [Book.ts:29](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Book.ts#L29)*
+*Defined in [Book.ts:29](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Book.ts#L29)*
 
 max-heap comparator function
 

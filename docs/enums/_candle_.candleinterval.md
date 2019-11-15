@@ -18,7 +18,7 @@ interval for each candle
 
 • **ONE_DAY**: = "1 day"
 
-*Defined in [Candle.ts:13](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Candle.ts#L13)*
+*Defined in [Candle.ts:14](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Candle.ts#L14)*
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 • **ONE_HOUR**: = "1 hour"
 
-*Defined in [Candle.ts:12](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Candle.ts#L12)*
+*Defined in [Candle.ts:13](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Candle.ts#L13)*
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 • **ONE_MINUTE**: = "1 minute"
 
-*Defined in [Candle.ts:11](https://github.com/hanzoai/matching-engine/blob/d87b82e/src/Candle.ts#L11)*
+*Defined in [Candle.ts:12](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Candle.ts#L12)*

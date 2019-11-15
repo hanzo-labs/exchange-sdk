@@ -7,6 +7,6 @@ export type Time = moment.Moment
  * unix time is always rendered correctly.
  */
 export default function(...args: any[]): moment.Moment {
-  return moment(...args).tz('America/Los_Angeles')
+  return moment(...args).tz('America/New_York')
 }
 
