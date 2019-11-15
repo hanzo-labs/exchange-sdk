@@ -63,6 +63,7 @@ export class CandleAVL extends AVLTree<number, Candle> {
    * @return an array of candles
    */
   timeSlice(startTime: number, endTime: number, limit: number = 1000): Candle[] {
+    startTime = startTime | 0
     limit = Math.max(Math.min(limit, 1000), 1)
 
     let candles: Candle[] = []
