@@ -125,7 +125,8 @@ export default function createSocketIO(
         startTime,
         interval,
         limit,
-        name
+        name,
+        type
       } = opts
 
       try {
@@ -150,7 +151,7 @@ export default function createSocketIO(
           )
         }
         const candles = ct.timeSlice(startTime, endTime, limit).map((x) => x.export())
-        socket.emit('candles.get.success', candles)
+        socket.emit('candles.get.success', { candles, type })
       } catch (e) {
         socket.emit('candles.get.error', {
           error: e.message,
