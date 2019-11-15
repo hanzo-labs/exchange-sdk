@@ -26,12 +26,14 @@ const createBook = (name: string) => {
   const c1m = new CandleAVL(CandleInterval.ONE_MINUTE)
   const c1h = new CandleAVL(CandleInterval.ONE_HOUR)
   const c1d = new CandleAVL(CandleInterval.ONE_DAY)
+  const c1w = new CandleAVL(CandleInterval.ONE_WEEK)
 
   candleTrees.set(
     name, new Map<CandleInterval, CandleAVL>([
       [CandleInterval.ONE_MINUTE, c1m],
       [CandleInterval.ONE_HOUR, c1h],
       [CandleInterval.ONE_DAY, c1d],
+      [CandleInterval.ONE_WEEK, c1w],
     ])
   )
 
@@ -62,6 +64,7 @@ const createBook = (name: string) => {
       c1m.tradesToCandles(trades)
       c1h.tradesToCandles(trades)
       c1d.tradesToCandles(trades)
+      c1w.tradesToCandles(trades)
     } catch(e) {
       //console.error(`Error creating book for ${name}`, e)
     }
@@ -90,6 +93,7 @@ const createBook = (name: string) => {
     c1m.tradesToCandles(trades)
     c1h.tradesToCandles(trades)
     c1d.tradesToCandles(trades)
+    c1w.tradesToCandles(trades)
   })
   console.log(`Finished setting up orderbook - ${name}`)
   return newBook

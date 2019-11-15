@@ -11,7 +11,8 @@ import memoize from 'fast-memoize'
 export enum CandleInterval {
   ONE_MINUTE = '1 minute',
   ONE_HOUR   = '1 hour',
-  ONE_DAY    = '1 day'
+  ONE_DAY    = '1 day',
+  ONE_WEEK   = '1 week',
 }
 
 /**
@@ -66,6 +67,9 @@ export class CandleAVL extends AVLTree<number, Candle> {
     let factor = 1000
 
     switch(this.interval) {
+      case CandleInterval.ONE_WEEK: {
+        factor *= 7
+      }
       case CandleInterval.ONE_DAY: {
         factor *= 24
       }
@@ -78,7 +82,7 @@ export class CandleAVL extends AVLTree<number, Candle> {
     }
 
     limit = Math.max(Math.min(limit, 1000), 1)
-    startTime = startTime ?? endTime - (limit -1) * factor
+    startTime = startTime ?? (endTime - (limit - 1) * factor)
 
     let candles: Candle[] = []
 
