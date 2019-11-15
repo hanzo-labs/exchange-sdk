@@ -24,7 +24,7 @@
 
 • **app**: *Express‹›* =  createHttp(books, candleTrees)
 
-*Defined in [server.ts:98](https://github.com/hanzoai/matching-engine/blob/37043cf/src/server.ts#L98)*
+*Defined in [server.ts:98](https://github.com/hanzoai/matching-engine/blob/2a88797/src/server.ts#L98)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • **books**: *Map‹string, [Book](../classes/_book_.book.md)‹››* =  new Map<string, Book>()
 
-*Defined in [server.ts:14](https://github.com/hanzoai/matching-engine/blob/37043cf/src/server.ts#L14)*
+*Defined in [server.ts:14](https://github.com/hanzoai/matching-engine/blob/2a88797/src/server.ts#L14)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **candleTrees**: *Map‹string, Map‹[CandleInterval](../enums/_candle_.candleinterval.md), [CandleAVL](../classes/_candle_.candleavl.md)‹›››* =  new Map<string,Map<CandleInterval, CandleAVL>>()
 
-*Defined in [server.ts:15](https://github.com/hanzoai/matching-engine/blob/37043cf/src/server.ts#L15)*
+*Defined in [server.ts:15](https://github.com/hanzoai/matching-engine/blob/2a88797/src/server.ts#L15)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **exp**: *function* =  random.exponential(1)
 
-*Defined in [server.ts:10](https://github.com/hanzoai/matching-engine/blob/37043cf/src/server.ts#L10)*
+*Defined in [server.ts:10](https://github.com/hanzoai/matching-engine/blob/2a88797/src/server.ts#L10)*
 
 #### Type declaration:
 
@@ -60,7 +60,7 @@ ___
 
 • **http**: *any* =  createSocketIO(books, candleTrees, app, createBook)
 
-*Defined in [server.ts:102](https://github.com/hanzoai/matching-engine/blob/37043cf/src/server.ts#L102)*
+*Defined in [server.ts:102](https://github.com/hanzoai/matching-engine/blob/2a88797/src/server.ts#L102)*
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 • **nrm**: *function* =  random.normal(1, 1)
 
-*Defined in [server.ts:11](https://github.com/hanzoai/matching-engine/blob/37043cf/src/server.ts#L11)*
+*Defined in [server.ts:11](https://github.com/hanzoai/matching-engine/blob/2a88797/src/server.ts#L11)*
 
 #### Type declaration:
 
@@ -80,7 +80,7 @@ ___
 
 • **port**: *4000* = 4000
 
-*Defined in [server.ts:100](https://github.com/hanzoai/matching-engine/blob/37043cf/src/server.ts#L100)*
+*Defined in [server.ts:100](https://github.com/hanzoai/matching-engine/blob/2a88797/src/server.ts#L100)*
 
 ## Functions
 
@@ -88,7 +88,7 @@ ___
 
 ▸ **createBook**(`name`: string): *undefined | [Book](../classes/_book_.book.md)‹›*
 
-*Defined in [server.ts:17](https://github.com/hanzoai/matching-engine/blob/37043cf/src/server.ts#L17)*
+*Defined in [server.ts:17](https://github.com/hanzoai/matching-engine/blob/2a88797/src/server.ts#L17)*
 
 **Parameters:**
 

@@ -57,7 +57,7 @@ a map collection for candles with the same intervals
 
 *Overrides void*
 
-*Defined in [Candle.ts:22](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Candle.ts#L22)*
+*Defined in [Candle.ts:22](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Candle.ts#L22)*
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ Name | Type | Description |
 
 • **interval**: *[CandleInterval](../enums/_candle_.candleinterval.md)*
 
-*Defined in [Candle.ts:21](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Candle.ts#L21)*
+*Defined in [Candle.ts:21](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Candle.ts#L21)*
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 • **timeFrame**: *string*
 
-*Defined in [Candle.ts:22](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Candle.ts#L22)*
+*Defined in [Candle.ts:22](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Candle.ts#L22)*
 
 ## Methods
 
@@ -404,7 +404,7 @@ ___
 
 ▸ **timeSlice**(`startTime`: number, `endTime`: number, `limit`: number): *[Candle](_candle_.candle.md)[]*
 
-*Defined in [Candle.ts:65](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Candle.ts#L65)*
+*Defined in [Candle.ts:65](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Candle.ts#L65)*
 
 returns the candles withing a certain time range
 
@@ -438,7 +438,7 @@ ___
 
 ▸ **tradesToCandles**(`trades`: [Trade](_trade_.trade.md)[]): *[CandleAVL](_candle_.candleavl.md)*
 
-*Defined in [Candle.ts:42](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Candle.ts#L42)*
+*Defined in [Candle.ts:42](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Candle.ts#L42)*
 
 process trades into candles
 

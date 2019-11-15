@@ -17,7 +17,7 @@ side of the order
 
 • **ASK**: = "ask"
 
-*Defined in [Order.ts:12](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Order.ts#L12)*
+*Defined in [Order.ts:12](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Order.ts#L12)*
 
 ask order
 
@@ -27,6 +27,6 @@ ___
 
 • **BID**: = "bid"
 
-*Defined in [Order.ts:16](https://github.com/hanzoai/matching-engine/blob/37043cf/src/Order.ts#L16)*
+*Defined in [Order.ts:16](https://github.com/hanzoai/matching-engine/blob/2a88797/src/Order.ts#L16)*
 
 bid order
