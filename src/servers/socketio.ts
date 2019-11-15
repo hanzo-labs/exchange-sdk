@@ -22,6 +22,7 @@ export default function createSocketIO(
     ['1m', CandleInterval.ONE_MINUTE],
     ['1h', CandleInterval.ONE_HOUR],
     ['1d', CandleInterval.ONE_DAY],
+    ['1w', CandleInterval.ONE_WEEK],
   ])
 
   const getEmitData = (book: Book) => {
