@@ -63,8 +63,22 @@ export class CandleAVL extends AVLTree<number, Candle> {
    * @return an array of candles
    */
   timeSlice(startTime: number, endTime: number, limit: number = 1000): Candle[] {
-    startTime = startTime | 0
+    let factor = 1000
+
+    switch(this.interval) {
+      case CandleInterval.ONE_DAY: {
+        factor *= 24
+      }
+      case CandleInterval.ONE_HOUR: {
+        factor *= 60
+      }
+      default: {
+        factor *= 60
+      }
+    }
+
     limit = Math.max(Math.min(limit, 1000), 1)
+    startTime = startTime ?? endTime - (limit -1) * factor
 
     let candles: Candle[] = []
 
