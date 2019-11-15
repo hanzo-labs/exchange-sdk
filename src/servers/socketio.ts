@@ -56,7 +56,7 @@ export default function createSocketIO(
           }
         })
       }
-    }, 15 * 1000)
+    }, 1000)
 
     socket.on('book.subscribe', (room: any) => {
       const { name } = room
@@ -109,7 +109,7 @@ export default function createSocketIO(
         const o = new Order(externalId, side, type, quantity, price)
         book.addOrder(o)
 
-        io.to(name).emit('order.create.success', getEmitData(book))
+        io.to(name).emit('order.create.success', order)
       } catch (e) {
         socket.emit('order.create.error', {
           error: e.message,
@@ -128,6 +128,8 @@ export default function createSocketIO(
         name,
         type
       } = opts
+
+      console.log('type', type)
 
       try {
         const cts = candleTrees.get(name)

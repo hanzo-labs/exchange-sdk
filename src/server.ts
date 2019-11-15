@@ -7,7 +7,6 @@ import createSocketIO from './servers/socketio'
 import Order, { OrderSide, OrderType} from './Order'
 import time from './utils/time'
 
-const exp = random.exponential(1)
 const nrm = random.normal(1, 1)
 
 // Big Data Structures
@@ -50,8 +49,8 @@ const createBook = (name: string) => {
         'rnd' + i,
         random.boolean() ? OrderSide.ASK : OrderSide.BID,
         random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
-        Math.round(100 * exp()),
-        Math.round(100 * nrm() + 50),
+        Math.round(100 * (1-nrm())),
+        (100 * nrm() + 50).toFixed(2),
         0,
         t,
       ))
@@ -79,8 +78,8 @@ const createBook = (name: string) => {
         'rnd',
         random.boolean() ? OrderSide.ASK : OrderSide.BID,
         random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
-        Math.round(10 * exp()),
-        Math.round(10 * nrm() + newBook.meanPrice.toNumber()),
+        Math.round(10 * (1- nrm())),
+        (10 * nrm() + newBook.meanPrice.toNumber()).toFixed(2),
       ))
     } catch(e) {
     }
