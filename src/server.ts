@@ -38,7 +38,7 @@ const createBook = (name: string) => {
 
   let t = time().valueOf() - (10000 * 100001)
 
-  console.log(`Creating order book with 1000000 orders for ${name}`)
+  console.log(`Creating order book with 100000 orders for ${name}`)
 
   // random input
   for (let i = 0; i < 100000; i++) {
