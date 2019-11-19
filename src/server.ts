@@ -77,6 +77,8 @@ const createBook = (name: string) => {
     }
   }
 
+  newBook.settle()
+
   // random input
   for (let i = 0; i < 10000; i++) {
     for (let j = 0; j < 10; j++) {
