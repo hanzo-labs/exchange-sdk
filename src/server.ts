@@ -51,6 +51,16 @@ const createBook = (name: string) => {
     t,
   ))
 
+  newBook.addOrder(new Order(
+    'baseline',
+    OrderSide.ASK,
+    OrderType.LIMIT,
+    10000000000,
+    900,
+    0,
+    t,
+  ))
+
   for (let j = 0; j < 10; j++) {
     try {
       newBook.addOrder(new Order(
