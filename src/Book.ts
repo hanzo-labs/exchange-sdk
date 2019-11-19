@@ -412,7 +412,7 @@ class Book {
       let fillPrice = secondaryOrder.price
 
       // handle aggressive limit fill price, take the older order's price
-      if (pIsLimit && sIsLimit && primaryOrder.seqId < secondaryOrder.seqId) {
+      if (primaryOrder.seqId < secondaryOrder.seqId) {
         fillPrice = primaryOrder.price
       }
 
