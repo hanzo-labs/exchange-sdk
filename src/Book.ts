@@ -393,16 +393,11 @@ class Book {
         this.addToPendingOrderBook(secondaryOrder.price, secondaryOrder.quantity.neg())
       }
 
-      if (pIsLimit && sIsLimit) {
-      }
-
       let fillPrice = secondaryOrder.price
 
       // handle aggressive limit fill price, take the older order's price
       if (pIsLimit && sIsLimit && primaryOrder.seqId < secondaryOrder.seqId) {
-        if (marketOrder == secondaryOrder) {
-          fillPrice = primaryOrder.price
-        }
+        fillPrice = primaryOrder.price
       }
 
       trades.push(

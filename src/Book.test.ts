@@ -1059,7 +1059,7 @@ describe('Book', () => {
     expect(trade.newOrders[0].price.equals(o1.price)).toBe(true)
     expect(trade.newOrders[0].quantity.equals(o1.quantity.sub(o2.fillQuantity))).toBe(true)
     expect(trade.rejectedOrders.length).toBe(0)
-    expect(trade.fillPrice.equals(o2.price)).toBe(true)
+    expect(trade.fillPrice.equals(o1.price)).toBe(true)
     expect(trade.fillQuantity.equals(o2.quantity)).toBe(true)
 
     let ob = book.orderBook
@@ -1424,7 +1424,7 @@ describe('Book', () => {
     expect(trade.newOrders[0].price.equals(o3.price)).toBe(true)
     expect(trade.newOrders[0].quantity.equals(remainderQuantity)).toBe(true)
     expect(trade.rejectedOrders.length).toBe(0)
-    expect(trade.fillPrice.equals(o2.price)).toBe(true)
+    expect(trade.fillPrice.equals(o3.price)).toBe(true)
     expect(trade.fillQuantity.equals(remainderQuantity)).toBe(true)
 
     let ob = book.orderBook
