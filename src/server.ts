@@ -40,7 +40,7 @@ const createBook = (name: string) => {
 
   console.log(`Creating order book with 100000 orders for ${name}`)
 
-  // insert super order for test sanity reasons
+  // insert super orders for sane prices
   newBook.addOrder(new Order(
     'baseline',
     OrderSide.BID,
@@ -60,6 +60,8 @@ const createBook = (name: string) => {
     0,
     t,
   ))
+
+  newBook.settle()
 
   // random input
   for (let i = 0; i < 10000; i++) {
