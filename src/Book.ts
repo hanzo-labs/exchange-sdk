@@ -29,7 +29,7 @@ export const naturalOrderCollator = new Intl.Collator(undefined, {numeric: true,
 export const bidComparator = function(a: Order, b: Order) {
   let ret = b.price.sub(a.price).toNumber()
   if (ret === 0) {
-    ret = a.createdAt - b.createdAt
+    ret = a.seqId - b.seqId
   }
   return ret
 }
@@ -43,7 +43,7 @@ export const bidComparator = function(a: Order, b: Order) {
 export const askComparator = function(a: Order, b: Order) {
   let ret = a.price.sub(b.price).toNumber()
   if (ret === 0) {
-    ret = a.createdAt - b.createdAt
+    ret = a.seqId - b.seqId
   }
   return ret
 }
@@ -385,10 +385,13 @@ class Book {
         this.addToPendingOrderBook(secondaryOrder.price, secondaryOrder.quantity.neg())
       }
 
+      if (pIsLimit && sIsLimit) {
+      }
+
       let fillPrice = secondaryOrder.price
 
-      // handle aggressive limit fill price
-      if (pIsLimit && sIsLimit) {
+      // handle aggressive limit fill price, take the older order's price
+      if (pIsLimit && sIsLimit && primaryOrder.seqId < secondaryOrder.seqId) {
         if (marketOrder == secondaryOrder) {
           fillPrice = primaryOrder.price
         }

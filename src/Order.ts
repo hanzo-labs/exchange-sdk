@@ -68,6 +68,8 @@ export enum OrderStatus {
   REMAINDER_REJECTED = 'remainder-rejected',
 }
 
+let orderCount = 0
+
 /**
  * represents an order that's put in a book
  */
@@ -76,6 +78,11 @@ export default class Order {
    * unique order id
    */
   id: string = uuid.v4()
+
+  /**
+   * unique sequencing number, used for tie breakers
+   */
+  seqId: number = orderCount++
 
   /**
    * id from an external system

@@ -40,33 +40,61 @@ const createBook = (name: string) => {
 
   console.log(`Creating order book with 100000 orders for ${name}`)
 
-  // random input
-  for (let i = 0; i < 100000; i++) {
-    try {
-      t += 10000
+  // insert super order for test sanity reasons
+  newBook.addOrder(new Order(
+    'baseline',
+    OrderSide.BID,
+    OrderType.LIMIT,
+    10000000000,
+    100,
+    0,
+    t,
+  ))
 
+  for (let j = 0; j < 10; j++) {
+    try {
       newBook.addOrder(new Order(
-        'rnd' + i,
+        'rndbase' + j,
         random.boolean() ? OrderSide.ASK : OrderSide.BID,
         random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
-        Math.round(100 * (1-nrm())),
-        (100 * nrm() + 50).toFixed(2),
+        random.int(0, 1000),
+        random.float(0, 1000).toFixed(2),
         0,
         t,
       ))
-
-      let trades = newBook.settle()
-      for (let trade of trades) {
-        trade.executedAt = t
-      }
-
-      c1m.tradesToCandles(trades)
-      c1h.tradesToCandles(trades)
-      c1d.tradesToCandles(trades)
-      c1w.tradesToCandles(trades)
     } catch(e) {
-      //console.error(`Error creating book for ${name}`, e)
+      // console.error(`Error creating book for ${name}`, e)
     }
+  }
+
+  // random input
+  for (let i = 0; i < 10000; i++) {
+    for (let j = 0; j < 10; j++) {
+      try {
+        t += 10000
+        newBook.addOrder(new Order(
+          'rnd' + i,
+          random.boolean() ? OrderSide.ASK : OrderSide.BID,
+          random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
+          random.int(0, 1000),
+          (random.float(0, newBook.spread.toNumber() * 10) - newBook.spread.toNumber() * 5 + newBook.meanPrice.toNumber()).toFixed(2),
+          0,
+          t,
+        ))
+      } catch(e) {
+        // console.error(`Error creating book for ${name}`, e)
+      }
+    }
+
+    let trades = newBook.settle()
+    for (let trade of trades) {
+      trade.executedAt = t
+    }
+
+    c1m.tradesToCandles(trades)
+    c1h.tradesToCandles(trades)
+    c1d.tradesToCandles(trades)
+    c1w.tradesToCandles(trades)
   }
 
   books.set(name, newBook)
@@ -74,13 +102,15 @@ const createBook = (name: string) => {
   //
   newBook.start((tb, trades) => {
     try {
-      newBook.addOrder(new Order(
-        'rnd',
-        random.boolean() ? OrderSide.ASK : OrderSide.BID,
-        random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
-        Math.round(10 * (1- nrm())),
-        (10 * nrm() + newBook.meanPrice.toNumber()).toFixed(2),
-      ))
+      if (random.int(0, 10) === 1) {
+        newBook.addOrder(new Order(
+          'rnd',
+          random.boolean() ? OrderSide.ASK : OrderSide.BID,
+          random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
+          random.int(0, 1000),
+          (random.float(0, newBook.spread.toNumber() * 10) - newBook.spread.toNumber() * 5 + newBook.meanPrice.toNumber()).toFixed(2),
+        ))
+      }
     } catch(e) {
     }
 
@@ -88,7 +118,6 @@ const createBook = (name: string) => {
       return
     }
 
-    // console.log(trades.length, 'trades')
     c1m.tradesToCandles(trades)
     c1h.tradesToCandles(trades)
     c1d.tradesToCandles(trades)
