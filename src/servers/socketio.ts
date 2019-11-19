@@ -29,14 +29,14 @@ export default function createSocketIO(
     if (!book) return {}
 
     const meanPrice = book.meanPrice
+    const lastPrice = book.lastPrice
     const spread = book.spread
     const orderBook = {
-      lastUpdated: time().valueOf(),
       asks: book.orderBook.asks.slice(0, 100).reverse(),
       bids: book.orderBook.bids.slice(-100).reverse(),
     }
 
-    return { meanPrice, spread, orderBook }
+    return { meanPrice, spread, orderBook, lastPrice, time: time().valueOf() }
   }
 
   io.on('connection', (socket: SocketIO.Socket) => {

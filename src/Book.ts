@@ -117,6 +117,12 @@ class Book {
    * cached mean price, can only safely be taken after a settle
    */
   private _meanPrice: Decimal = new Decimal(0)
+
+  /**
+   * cached last executed price, can only safely be taken after a settle
+   */
+  private _lastPrice: Decimal = new Decimal(0)
+
   /**
    * this is a list of pending orders that is merged into the existing orderbook on settle
    */
@@ -298,8 +304,18 @@ class Book {
     return this.nearestAsk()?.price.sub(this.nearestBid()?.price ?? 0) ?? new Decimal(0)
   }
 
+  /**
+   * @return return the average of the lowest ask and the highest bid
+   */
   get meanPrice(): Decimal {
     return this._meanPrice
+  }
+
+  /**
+   * @return return the lasted price traded
+   */
+  get lastPrice(): Decimal {
+    return this._lastPrice
   }
 
   /**
@@ -443,6 +459,11 @@ class Book {
 
     this._renderedOrderBook.asks.length = 0
     this._renderedOrderBook.bids.length = 0
+
+    let lastTrade = trades[trades.length - 1]
+    if (lastTrade) {
+      this._lastPrice = lastTrade.fillPrice
+    }
 
     if (bidPrice && askPrice) {
       this._meanPrice = askPrice.add(bidPrice).div(2)
