@@ -61,24 +61,6 @@ const createBook = (name: string) => {
     t,
   ))
 
-  for (let j = 0; j < 10; j++) {
-    try {
-      newBook.addOrder(new Order(
-        'rndbase' + j,
-        random.boolean() ? OrderSide.ASK : OrderSide.BID,
-        random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
-        random.int(0, 1000),
-        random.float(0, 1000).toFixed(2),
-        0,
-        t,
-      ))
-    } catch(e) {
-      // console.error(`Error creating book for ${name}`, e)
-    }
-  }
-
-  newBook.settle()
-
   // random input
   for (let i = 0; i < 10000; i++) {
     for (let j = 0; j < 10; j++) {

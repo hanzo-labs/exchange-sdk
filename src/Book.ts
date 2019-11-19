@@ -295,7 +295,7 @@ class Book {
    * limit orders
    */
   get spread(): Decimal {
-    return this.nearestAsk()?.price.sub(this.nearestBid()?.price ?? Infinity) ?? new Decimal(Infinity)
+    return this.nearestAsk()?.price.sub(this.nearestBid()?.price ?? 0) ?? new Decimal(0)
   }
 
   get meanPrice(): Decimal {
