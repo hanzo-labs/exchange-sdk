@@ -30,7 +30,11 @@ export default function createSocketIO(
 
     const meanPrice = book.meanPrice
     const spread = book.spread
-    const orderBook = book.orderBook
+    const orderBook = {
+      lastUpdated: time().valueOf(),
+      asks: book.orderBook.asks.slice(0, 100).reverse(),
+      bids: book.orderBook.bids.slice(-100).reverse(),
+    }
 
     return { meanPrice, spread, orderBook }
   }
@@ -51,7 +55,7 @@ export default function createSocketIO(
         rooms.forEach(r => {
           const book = books.get(r)
           if (book) {
-            console.log(`Broadcasting to ${r}`)
+            // console.log(`Broadcasting to ${r}`)
             io.to(r).emit('book.data', getEmitData(book))
           }
         })

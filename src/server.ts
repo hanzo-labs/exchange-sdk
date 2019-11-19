@@ -114,10 +114,10 @@ const createBook = (name: string) => {
     try {
       if (random.int(0, 10) === 1) {
         newBook.addOrder(new Order(
-          'rnd',
+          'rnd-live-' + time().valueOf(),
           random.boolean() ? OrderSide.ASK : OrderSide.BID,
-          random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
-          random.int(0, 1000),
+          random.boolean() ? OrderType.LIMIT : OrderType.MARKET,
+          random.int(0, 1000) * 10,
           (random.float(0, newBook.spread.toNumber() * 10) - newBook.spread.toNumber() * 5 + newBook.meanPrice.toNumber()).toFixed(2),
         ))
       }

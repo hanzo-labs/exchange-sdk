@@ -223,8 +223,16 @@ class Book {
       throw new Error('invalid negative price')
     }
 
+    if (!order.price.isFinite()) {
+      throw new Error('invalid price is not finite')
+    }
+
     if (order.quantity.lessThanOrEqualTo(0)) {
       throw new Error('invalid non-positive quantity')
+    }
+
+    if (!order.quantity.isFinite()) {
+      throw new Error('invalid quantity is not finite')
     }
 
     if (order.side === OrderSide.BID) {
