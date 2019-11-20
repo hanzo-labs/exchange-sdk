@@ -71,9 +71,9 @@ const createBook = (name: string) => {
         newBook.addOrder(new Order(
           'rnd' + i,
           random.boolean() ? OrderSide.ASK : OrderSide.BID,
-          random.int(0, 10) > 1 ? OrderType.LIMIT : OrderType.MARKET,
+          random.int(0, 10) > 2 ? OrderType.LIMIT : OrderType.MARKET,
           random.int(0, 1000),
-          (random.float(0, newBook.spread.toNumber() * 10) - newBook.spread.toNumber() * 5 + newBook.meanPrice.toNumber()).toFixed(2),
+          (random.float(0, newBook.spread.sqrt().toNumber() * 4) - newBook.spread.sqrt().toNumber() * 2 + newBook.meanPrice.toNumber()).toFixed(2),
           0,
           t,
         ))
@@ -102,9 +102,9 @@ const createBook = (name: string) => {
         newBook.addOrder(new Order(
           'rnd-live-' + time().valueOf(),
           random.boolean() ? OrderSide.ASK : OrderSide.BID,
-          random.boolean() ? OrderType.LIMIT : OrderType.MARKET,
+          random.int(0, 10) > 2 ? OrderType.LIMIT : OrderType.MARKET,
           random.int(0, 1000) * 10,
-          (random.float(0, newBook.spread.toNumber() * 10) - newBook.spread.toNumber() * 5 + newBook.meanPrice.toNumber()).toFixed(2),
+          (random.float(0, newBook.spread.sqrt().toNumber() * 4) - newBook.spread.sqrt().toNumber() * 2 + newBook.meanPrice.toNumber()).toFixed(2),
         ))
       }
     } catch(e) {
