@@ -114,6 +114,11 @@ class Book {
   }
 
   /**
+   * cached spread price, can only safely be taken after a settle
+   */
+  private _displaySpread: Decimal = new Decimal(0)
+
+  /**
    * cached mean price, can only safely be taken after a settle
    */
   private _meanPrice: Decimal = new Decimal(0)
@@ -302,6 +307,13 @@ class Book {
    */
   get spread(): Decimal {
     return this.nearestAsk()?.price.sub(this.nearestBid()?.price ?? 0) ?? new Decimal(0)
+  }
+
+  /**
+   * @return return the spread for display
+   */
+  get displaySpread(): Decimal {
+    return this._displaySpread
   }
 
   /**
@@ -506,6 +518,9 @@ class Book {
     } else {
       this._meanPrice = new Decimal(0)
     }
+
+    // cache a safe to display spread
+    this._displaySpread = this.spread
 
     // TODO: handle cancellations
 

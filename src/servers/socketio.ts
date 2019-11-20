@@ -30,7 +30,7 @@ export default function createSocketIO(
 
     const meanPrice = book.meanPrice
     const lastPrice = book.lastPrice
-    const spread = book.spread
+    const spread = book.displaySpread
     const orderBook = {
       asks: book.orderBook.asks.slice(0, 100).reverse(),
       bids: book.orderBook.bids.slice(-100).reverse(),
