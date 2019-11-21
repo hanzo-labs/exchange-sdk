@@ -3,15 +3,18 @@ import random from 'random'
 import createHttp from './servers/http'
 import Book from './Book'
 import Candle, { CandleInterval, CandleAVL } from './Candle'
-import createSocketIO from './servers/socketio'
+import createSocketIO, { onTradeFn } from './servers/socketio'
 import Order, { OrderSide, OrderType} from './Order'
+import Trade from './Trade'
 import time from './utils/time'
 
 const nrm = random.normal(1, 1)
 
 // Big Data Structures
 const books = new Map<string, Book>()
-const candleTrees = new Map<string,Map<CandleInterval, CandleAVL>>()
+const candleTrees = new Map<string, Map<CandleInterval, CandleAVL>>()
+
+let onTrade: onTradeFn = (name: string, ts: Trade[]) => {}
 
 const createBook = (name: string) => {
   if (books.get(name)) {
@@ -146,6 +149,8 @@ const createBook = (name: string) => {
     c1h.tradesToCandles(trades)
     c1d.tradesToCandles(trades)
     c1w.tradesToCandles(trades)
+
+    onTrade(name, trades)
   })
   console.log(`Finished setting up orderbook - ${name}`)
   return newBook
@@ -155,6 +160,6 @@ const app = createHttp(books, candleTrees)
 
 const port = 4000
 // http.createServer(app).listen(port)
-const http = createSocketIO(books, candleTrees, app, createBook)
+const http = createSocketIO(books, candleTrees, app, createBook, (fn: onTradeFn) => onTrade = fn)
 http.listen(port)
 console.log('listening on port', port)

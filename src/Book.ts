@@ -423,9 +423,14 @@ class Book {
 
       let fillPrice = secondaryOrder.price
 
+      let matchedOrders = []
+
       // handle aggressive limit fill price, take the older order's price
       if (primaryOrder.seqId < secondaryOrder.seqId) {
         fillPrice = primaryOrder.price
+        matchedOrders = [secondaryOrder, primaryOrder]
+      } else {
+        matchedOrders = [primaryOrder, secondaryOrder]
       }
 
       trades.push(
@@ -433,7 +438,7 @@ class Book {
           fillQuantity,
           fillPrice,
           newOrders,
-          [primaryOrder, secondaryOrder],
+          matchedOrders,
           rejectedOrders
         )
       )

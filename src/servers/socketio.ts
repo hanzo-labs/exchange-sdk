@@ -3,13 +3,21 @@ import SocketIO from 'socket.io'
 import time from '../utils/time'
 import Book from '../Book'
 import Order from '../Order'
+import Trade from '../Trade'
 import { CandleAVL, CandleInterval } from '../Candle'
+
+const bookRoomName = (x: string) => x + '.book'
+const tradeRoomName = (x: string) => x + '.trades'
+const nameFromRoomName = (x: string) => x.split('.')[0]
+
+export type onTradeFn = (name: string, ts: Trade[]) => void
 
 export default function createSocketIO(
   books: Map<string, Book>,
   candleTrees: Map<string, Map<CandleInterval, CandleAVL>>,
   app: any,
   createBook: any,
+  onTrade: (fn: onTradeFn) => void,
 ) {
   const http: any = require('http').createServer(app)
   const io: SocketIO.Server = SocketIO(http, {
@@ -51,19 +59,31 @@ export default function createSocketIO(
       // console.log('Sending out the order books!')
       console.log('Found socket rooms', socket.rooms)
       const rooms = Object.keys(socket.rooms)
+
       if (rooms) {
+        const broadcasted: any = {}
+
         rooms.forEach(r => {
-          const book = books.get(r)
-          if (book) {
+          const name = nameFromRoomName(r)
+          const book = books.get(name)
+
+          if (book && !broadcasted[name]) {
             // console.log(`Broadcasting to ${r}`)
-            io.to(r).emit('book.data', getEmitData(book))
+            io.to(bookRoomName(name)).emit('book.data', getEmitData(book))
           }
         })
       }
     }, 1000)
 
+    onTrade((name: string, ts: Trade[] = []) => {
+      const roomName = tradeRoomName(name)
+
+      io.to(roomName).emit('trade.data', ts.map(({ id, fillPrice, fillQuantity, executedAt, matchedOrders }) => ({ id, fillPrice, fillQuantity, executedAt, executingOrder: matchedOrders[0] })))
+    })
+
     socket.on('book.subscribe', (room: any) => {
       const { name } = room
+      const roomName = bookRoomName(name)
 
       try {
         let book = books.get(name)
@@ -75,7 +95,7 @@ export default function createSocketIO(
           }
         }
 
-        socket.join(name)
+        socket.join(roomName)
         const emitData = getEmitData(book)
         socket.emit('book.subscribe.success', {
           success: true,
@@ -90,9 +110,10 @@ export default function createSocketIO(
 
     socket.on('book.unsubscribe', (room: any) => {
       const { name } = room
+      const roomName = bookRoomName(name)
 
       try {
-        socket.leave(name)
+        socket.leave(roomName)
 
         socket.emit('book.unsubscribe.success', { success: true })
       } catch (e) {
@@ -102,16 +123,56 @@ export default function createSocketIO(
       }
     })
 
+    socket.on('trade.subscribe', (room: any) => {
+      const { name } = room
+      const roomName = tradeRoomName(name)
+
+      try {
+        let book = books.get(name)
+        if (!book) {
+          // Make the trade
+          book = createBook(name)
+          if (!book) {
+            throw new Error('Double check for trade, these are dumb')
+          }
+        }
+
+        socket.join(roomName)
+        socket.emit('trade.subscribe.success', {
+          success: true,
+        })
+      } catch (e) {
+        socket.emit('trade.subscribe.error', {
+          error: e.message,
+        })
+      }
+    })
+
+    socket.on('trade.unsubscribe', (room: any) => {
+      const { name } = room
+      const roomName = tradeRoomName(name)
+
+      try {
+        socket.leave(roomName)
+
+        socket.emit('trade.unsubscribe.success', { success: true })
+      } catch (e) {
+        socket.emit('trade.unsubscribe.error', {
+          error: e.message,
+        })
+      }
+    })
+
     socket.on('order.create', (order: any) => {
       const { externalId, side, type, quantity, price, name } = order
 
       try {
-        const book = books.get(name)
-        if (!book) {
-          throw new Error(`Book ${book} not found`)
+        const trade = books.get(name)
+        if (!trade) {
+          throw new Error(`trade ${trade} not found`)
         }
         const o = new Order(externalId, side, type, quantity, price)
-        book.addOrder(o)
+        trade.addOrder(o)
 
         io.to(name).emit('order.create.success', order)
       } catch (e) {
