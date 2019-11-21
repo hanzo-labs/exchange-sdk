@@ -36,7 +36,7 @@ const createBook = (name: string) => {
     ])
   )
 
-  let t = time().valueOf() - (10000 * 100001)
+  let t = time().valueOf() - (10000 * 100001) - (60 * 60 * 1000 * 10000)
 
   console.log(`Creating order book with 100000 orders for ${name}`)
 
@@ -63,13 +63,41 @@ const createBook = (name: string) => {
 
   newBook.settle()
 
-  // random input
+  // random hours
+  for (let i = 0; i < 10000; i++) {
+    try {
+      t += 60 * 60 * 1000
+      newBook.addOrder(new Order(
+        'rnd-days' + i,
+        random.boolean() ? OrderSide.ASK : OrderSide.BID,
+        random.int(0, 10) > 2 ? OrderType.LIMIT : OrderType.MARKET,
+        random.int(0, 1000),
+        (random.float(0, newBook.spread.sqrt().toNumber() * 4) - newBook.spread.sqrt().toNumber() * 2 + newBook.meanPrice.toNumber()).toFixed(2),
+        0,
+        t,
+      ))
+    } catch(e) {
+      // console.error(`Error creating book for ${name}`, e)
+    }
+
+    let trades = newBook.settle()
+    for (let trade of trades) {
+      trade.executedAt = t
+    }
+
+    c1m.tradesToCandles(trades)
+    c1h.tradesToCandles(trades)
+    c1d.tradesToCandles(trades)
+    c1w.tradesToCandles(trades)
+  }
+
+  // random minutes
   for (let i = 0; i < 10000; i++) {
     for (let j = 0; j < 10; j++) {
       try {
         t += 10000
         newBook.addOrder(new Order(
-          'rnd' + i,
+          'rnd-minutes' + i,
           random.boolean() ? OrderSide.ASK : OrderSide.BID,
           random.int(0, 10) > 2 ? OrderType.LIMIT : OrderType.MARKET,
           random.int(0, 1000),
