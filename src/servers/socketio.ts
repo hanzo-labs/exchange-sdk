@@ -60,7 +60,7 @@ export default function createSocketIO(
           }
         })
       }
-    }, 500)
+    }, 1000)
 
     socket.on('book.subscribe', (room: any) => {
       const { name } = room
