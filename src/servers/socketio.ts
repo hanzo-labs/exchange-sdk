@@ -47,7 +47,7 @@ export default function createSocketIO(
     return { meanPrice, spread, orderBook, lastPrice, time: time().valueOf() }
   }
 
-  // Setup broadcast interval
+  // Setup broadcast interval for bid data
   let broadcastInterval = setInterval(() => {
     // Iterate through each book and broadcast to each room
     // console.log('Sending out the order books!')
@@ -69,6 +69,11 @@ export default function createSocketIO(
     }
   }, 500)
 
+  // Setup broadcast for trade data trigger
+  onTrade((name: string, ts: Trade[] = []) => {
+    io.to(tradeRoomName(name)).emit('trade.data', ts.map(({ id, fillPrice, fillQuantity, executedAt, matchedOrders }) => ({ id, fillPrice, fillQuantity, executedAt, executingOrder: matchedOrders[0] })))
+  })
+
   io.on('connection', (socket: SocketIO.Socket) => {
     const ip = socket.handshake.headers['x-forwarded-for'] ?? socket.conn.remoteAddress;
     console.log('user connected', ip)
@@ -76,12 +81,6 @@ export default function createSocketIO(
     // On connection we should check to see if the user has previous historical data
     // If they have client side data already we need to figure out any gaps they're missing and fill them
     // If they don't have client data we need to send them the historical payload
-
-    onTrade((name: string, ts: Trade[] = []) => {
-      const roomName = tradeRoomName(name)
-
-      io.to(roomName).emit('trade.data', ts.map(({ id, fillPrice, fillQuantity, executedAt, matchedOrders }) => ({ id, fillPrice, fillQuantity, executedAt, executingOrder: matchedOrders[0] })))
-    })
 
     socket.on('book.subscribe', (room: any) => {
       const { name } = room
