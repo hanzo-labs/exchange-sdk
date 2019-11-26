@@ -47,33 +47,35 @@ export default function createSocketIO(
     return { meanPrice, spread, orderBook, lastPrice, time: time().valueOf() }
   }
 
+  // Setup broadcast interval
+  let broadcastInterval = setInterval(() => {
+    // Iterate through each book and broadcast to each room
+    // console.log('Sending out the order books!')
+    console.log('Found socket rooms', io.sockets.adapter.rooms, new Date())
+    const rooms = Object.keys(io.sockets.adapter.rooms)
+
+    if (rooms) {
+      const broadcasted: any = {}
+
+      rooms.forEach(r => {
+        const name = nameFromRoomName(r)
+        const book = books.get(name)
+
+        if (book && !broadcasted[name]) {
+          // console.log(`Broadcasting to ${r}`)
+          io.to(bookRoomName(name)).emit('book.data', getEmitData(book))
+        }
+      })
+    }
+  }, 500)
+
   io.on('connection', (socket: SocketIO.Socket) => {
-    console.log('user connected')
+    const ip = socket.handshake.headers['x-forwarded-for'] ?? socket.conn.remoteAddress;
+    console.log('user connected', ip)
+
     // On connection we should check to see if the user has previous historical data
     // If they have client side data already we need to figure out any gaps they're missing and fill them
     // If they don't have client data we need to send them the historical payload
-
-    // Setup broadcast interval
-    let broadcastInterval = setInterval(() => {
-      // Iterate through each book and broadcast to each room
-      // console.log('Sending out the order books!')
-      console.log('Found socket rooms', socket.rooms)
-      const rooms = Object.keys(socket.rooms)
-
-      if (rooms) {
-        const broadcasted: any = {}
-
-        rooms.forEach(r => {
-          const name = nameFromRoomName(r)
-          const book = books.get(name)
-
-          if (book && !broadcasted[name]) {
-            // console.log(`Broadcasting to ${r}`)
-            io.to(bookRoomName(name)).emit('book.data', getEmitData(book))
-          }
-        })
-      }
-    }, 1000)
 
     onTrade((name: string, ts: Trade[] = []) => {
       const roomName = tradeRoomName(name)
@@ -228,7 +230,6 @@ export default function createSocketIO(
 
     socket.on('disconnect', () => {
       console.log('user disconnected')
-      clearInterval(broadcastInterval)
     })
   })
 
