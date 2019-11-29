@@ -134,7 +134,7 @@ const createBook = (name: string) => {
           'rnd-live-' + time().valueOf(),
           random.boolean() ? OrderSide.ASK : OrderSide.BID,
           random.int(0, 10) > 2 ? OrderType.LIMIT : OrderType.MARKET,
-          random.int(0, 1000) * 10,
+          random.int(0, 100),
           (random.float(0, newBook.spread.sqrt().toNumber() * 4) - newBook.spread.sqrt().toNumber() * 2 + newBook.meanPrice.toNumber()).toFixed(2),
         ))
       }
