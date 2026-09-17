@@ -24,7 +24,7 @@
     "jest": "24.9.0",
     "node-eval": "2.0.0",
     "nodemon": "1.19.4",
-    "rollup": "1.23.0",
+    "rollup": "2.80.0",
     "rollup-plugin-babel": "4.3.3",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-filesize": "6.2.1",
